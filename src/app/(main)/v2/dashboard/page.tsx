@@ -206,7 +206,7 @@ function Dashboard() {
                 </button>
               </div>
               {/* Stats cards */}
-              <div className="content-stretch flex gap-[24px] items-center relative shrink-0 w-full">
+              <div className="content-stretch flex gap-[16px] items-center relative shrink-0 w-full">
                 {/* Total applications card */}
                 <div className="basis-0 bg-v2-background-secondary box-border content-stretch flex flex-col gap-[20px] grow items-start min-h-px min-w-px p-[16px] relative rounded-[8px] shrink-0">
                   <p className="leading-[normal] not-italic relative shrink-0 text-[14px] text-v2-text-primary tracking-[-0.14px] w-full" style={fontMedium}>
