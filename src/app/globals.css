@@ -1,0 +1,352 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --ring: oklch(0.708 0 0);
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #000000; /* primary to pure black */
+  --primary-foreground: #ffffff;
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+
+  /* V2 Color Palette */
+  --v2-background-primary: #151619;
+  --v2-background-secondary: #1d1f22;
+  --v2-border-default: #252628;
+  --v2-border-light: #8aa8ba;
+  --v2-text-primary: #ffffff;
+  --v2-text-secondary: #a1a2a3;
+  --v2-text-muted: #898989;
+  --v2-text-accent: #7296ac;
+  --v2-text-button: #8aa8ba;
+  --v2-brand-primary: #145075;
+  --v2-status-error: #B04B41;
+  
+  /* V2 Toast Colors */
+  --v2-toast-success: #386f4e;
+  --v2-toast-error: #592b26;
+  --v2-toast-info: #213d4e;
+  --v2-toast-warning: #4f3527;
+  
+  /* V2 Status Colors */
+  /* Applied */
+  --v2-status-applied-bg: #1d1f22;
+  --v2-status-applied-border: #252628;
+  --v2-status-applied-text: #ffffff;
+  
+  /* Rejected */
+  --v2-status-rejected-bg: #311614;
+  --v2-status-rejected-border: #592b26;
+  --v2-status-rejected-text: #d37e76;
+  
+  /* Interview */
+  --v2-status-interview-bg: #1f140d;
+  --v2-status-interview-border: #4f3527;
+  --v2-status-interview-text: #ddd2a3;
+  
+  /* Offer */
+  --v2-status-offer-bg: #112531;
+  --v2-status-offer-border: #213d4e;
+  --v2-status-offer-text: #368abe;
+  
+  /* Accepted */
+  --v2-status-accepted-bg: #123520;
+  --v2-status-accepted-border: #386f4e;
+  --v2-status-accepted-text: #48ba77;
+}
+
+/* Theme variables */
+:root {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --muted: #1a1a1a;
+    --muted-foreground: #a1a1aa;
+  }
+}
+
+/* Smooth animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* V2 Custom Scrollbar for textareas */
+.v2-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.v2-scrollbar::-webkit-scrollbar-track {
+  background: #151619;
+  border-radius: 4px;
+}
+
+.v2-scrollbar::-webkit-scrollbar-thumb {
+  background: #252628;
+  border-radius: 4px;
+}
+
+.v2-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #898989;
+}
+
+/* Firefox scrollbar */
+.v2-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #252628 #151619;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    font-family: 'Figtree', sans-serif;
+  }
+  body {
+    @apply bg-[#151619] text-foreground;
+    font-family: 'Figtree', sans-serif;
+  }
+}
+
+/* V2 Theme - Always use V2 colors when using V2 components */
+.v2 {
+  --background: var(--v2-background-primary);
+  --foreground: var(--v2-text-primary);
+  --card: var(--v2-background-secondary);
+  --card-foreground: var(--v2-text-primary);
+  --border: var(--v2-border-default);
+  --primary: var(--v2-brand-primary);
+  --primary-foreground: var(--v2-text-primary);
+}
+
+/* Standard Transition Easing */
+:root {
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* QuickActionMenu animations */
+@keyframes menuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Smooth fade in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Smooth slide up animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scale animation for buttons */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* TextField cursor blink animation */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* V2 Navigation - Icon hover states */
+.group:hover [data-nav-icon] {
+  filter: brightness(0) saturate(100%) invert(100%) !important;
+  transition: filter 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Delete icon should stay red, but text turns white on hover */
+.group:hover [data-delete-icon] {
+  filter: none !important; /* Keep delete icon red */
+}
+
+/* Force pointer cursor on icon buttons and their children */
+.icon-button,
+.icon-button *,
+.icon-button img,
+.icon-button button,
+.icon-button button *,
+.icon-button button img,
+.icon-button button img * {
+  cursor: pointer !important;
+}
+
+/* Force pointer cursor on all button elements and their children */
+button[type="button"],
+button[type="button"] *,
+button[type="button"] img,
+button[type="button"] img * {
+  cursor: pointer !important;
+}
+
+/* Prevent text cursor on images inside buttons - most specific */
+.icon-button button[type="button"] img,
+.icon-button button[type="button"] img *,
+.icon-button button[type="button"] > * img,
+.icon-button button[type="button"] > * > * img {
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  pointer-events: none !important;
+}
+
+/* Most specific - override any text cursor from parent containers */
+.icon-button button[type="button"],
+.icon-button button[type="button"] *,
+.icon-button button[type="button"]::before,
+.icon-button button[type="button"]::after {
+  cursor: pointer !important;
+}
+
+/* Ensure button itself always shows pointer, even when hovering over child elements */
+button[type="button"].icon-button,
+.icon-button > button[type="button"] {
+  cursor: pointer !important;
+}
