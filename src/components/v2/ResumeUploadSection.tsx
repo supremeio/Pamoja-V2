@@ -5,8 +5,6 @@ import { FileUpload, FileUploadState } from './FileUpload'
 import { Separator } from './Separator'
 import { typography } from '@/lib/typography/v2'
 import { colorValues } from '@/lib/colors/v2'
-import { spacing } from '@/lib/spacing/v2'
-import { sizes } from '@/lib/sizing/v2'
 import { createTransition } from '@/lib/transitions/v2'
 
 const fontMedium = typography.medium

@@ -155,7 +155,7 @@ export function TextField({
     onFocus?.()
   }, [onFocus, variant, dropdownOptions])
 
-  const handleBlur = useCallback((e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleBlur = useCallback((_e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTimeout(() => {
       const activeElement = document.activeElement
       const container = containerRef.current
@@ -307,7 +307,7 @@ export function TextField({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside, true)
     }
-  }, [isFocused])
+  }, [isFocused, closeDropdown])
 
   useEffect(() => {
     return () => {

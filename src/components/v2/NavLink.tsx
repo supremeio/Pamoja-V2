@@ -31,7 +31,7 @@ export const NavLink = React.memo(function NavLink({
   href,
   children,
   className = '',
-  active = false,
+  active: _active = false,
   onClick
 }: NavLinkProps) {
   return (

@@ -10,7 +10,6 @@ import { createTransition } from '@/lib/transitions/v2'
 const fontMedium = typography.medium
 
 // Icon assets from local icon library
-const imgAddIcon1 = "/icons/v2/add-icon.svg" // Plus icon
 const img7 = "/icons/v2/delete-icon.svg" // Delete icon
 const img8 = "/icons/v2/edit-icon.svg" // Edit icon
 const img9 = "/icons/v2/minus-icon.svg" // Minus icon

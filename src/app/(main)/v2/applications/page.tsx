@@ -46,7 +46,7 @@ function Applications() {
     setIsApplyModalOpen(true)
   }, [])
 
-  const handleApplySubmit = useCallback(async (data: {
+  const handleApplySubmit = useCallback(async (_data: {
     company: string
     role: string
     jobDescription: string
@@ -66,7 +66,7 @@ function Applications() {
     })
   }, [])
 
-  const handleAddApplicationSubmit = useCallback(async (data: {
+  const handleAddApplicationSubmit = useCallback(async (_data: {
     company: string
     role: string
     dateApplied: string
@@ -78,7 +78,7 @@ function Applications() {
     setIsAddApplicationModalOpen(false)
   }, [showToast])
 
-  const handleGenerateCoverLetterSubmit = useCallback(async (data: {
+  const handleGenerateCoverLetterSubmit = useCallback(async (_data: {
     company: string
     role: string
     jobDescription: string

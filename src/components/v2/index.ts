@@ -5,7 +5,7 @@
 export { SideNavigation } from './SideNavigation'
 export { TopNavigation } from './TopNavigation'
 export { TextField } from './TextField'
-export { Toast, ToastProvider, useToast, toast } from './Toast'
+export { ToastProvider, useToast, toast } from './Toast'
 export { QuestionRow } from './QuestionRow'
 export { Separator } from './Separator'
 export { NavLink } from './NavLink'

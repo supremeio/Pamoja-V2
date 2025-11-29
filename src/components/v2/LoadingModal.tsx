@@ -56,7 +56,7 @@ export function LoadingModal({
 
   // Find the current loading process index
   const currentLoadingIndex = processes.findIndex(p => p.status === 'loading')
-  const completedCount = processes.filter(p => p.status === 'completed').length
+  const _completedCount = processes.filter(p => p.status === 'completed').length
 
   useEffect(() => {
     if (isOpen) {
@@ -73,7 +73,7 @@ export function LoadingModal({
       const timer = setTimeout(() => setIsMounted(false), 300)
       return () => clearTimeout(timer)
     }
-  }, [isOpen])
+  }, [isOpen, initialProcesses])
   
   // Reset processes when initialProcesses changes
   useEffect(() => {
@@ -225,7 +225,7 @@ export function LoadingModal({
               const loadingIndex = processes.findIndex(p => p.status === 'loading')
               const itemHeight = 48 // gap-[24px] + item height [24px]
               const clearVisibleAreaTop = 255 // End of top gradient
-              const clearVisibleAreaBottom = 303 // Start of bottom gradient
+              const _clearVisibleAreaBottom = 303 // Start of bottom gradient
               
               // Position the list so the loading process is at clearVisibleAreaTop (255px)
               // When loadingIndex = 0: listTopOffset = 255
@@ -251,7 +251,7 @@ export function LoadingModal({
                   {processes.map((process, index) => {
                     const isCompleted = process.status === 'completed'
                     const isLoading = process.status === 'loading'
-                    const isPending = process.status === 'pending'
+                    const _isPending = process.status === 'pending'
                     
                     return (
                       <div

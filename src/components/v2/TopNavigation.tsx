@@ -5,7 +5,6 @@ import { QuickActionMenu } from './QuickActionMenu'
 import { typography } from '@/lib/typography/v2'
 
 const fontMedium = typography.medium
-const fontBold = typography.bold
 
 // Icon assets from local icon library
 const imgVuesaxBoldNote2 = "/icons/v2/pamoja-logo.svg" // Pamoja logo

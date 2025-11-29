@@ -30,7 +30,7 @@ interface GenerateCoverLetterModalProps {
   }) => void
 }
 
-export function GenerateCoverLetterModal({ isOpen, onClose, onSubmit }: GenerateCoverLetterModalProps) {
+export function GenerateCoverLetterModal({ isOpen, onClose, onSubmit: _onSubmit }: GenerateCoverLetterModalProps) {
   const router = useRouter()
   const pathname = usePathname()
   const [formData, setFormData] = useState({

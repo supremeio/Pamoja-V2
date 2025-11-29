@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { TextField } from './TextField'
@@ -8,17 +8,12 @@ import { LoadingModal } from './LoadingModal'
 import { FileUploadState } from './FileUpload'
 import { ResumeUploadSection } from './ResumeUploadSection'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
-import { spacing } from '@/lib/spacing/v2'
-import { sizes } from '@/lib/sizing/v2'
-import { createTransition } from '@/lib/transitions/v2'
 
 const fontMedium = typography.medium
 const fontSemibold = typography.semibold
 
 // Icon assets from local icon library
 const imgCloseIcon = "/icons/v2/close-icon.svg" // Close icon
-const img10 = "/icons/v2/upload-icon.svg" // Upload icon
 const img11 = "/icons/v2/cover-letter-icon.svg" // Generate cover letter icon
 const img12 = "/icons/v2/optimize-icon.svg" // Optimize application icon
 
@@ -33,7 +28,7 @@ interface ApplyJobModalProps {
   }) => void
 }
 
-export function ApplyJobModal({ isOpen, onClose, onSubmit }: ApplyJobModalProps) {
+export function ApplyJobModal({ isOpen, onClose, onSubmit: _onSubmit }: ApplyJobModalProps) {
   const router = useRouter()
   const pathname = usePathname()
   const [formData, setFormData] = useState({

@@ -13,7 +13,6 @@ const fontSemibold = typography.semibold
 
 // Icon assets from local icon library
 const imgCloseIcon = "/icons/v2/close-icon.svg"
-const imgUploadIcon = "/icons/v2/upload-icon.svg"
 const imgOptimizeIcon = "/icons/v2/optimize-icon.svg"
 
 interface OptimizeResumeModalProps {
@@ -31,10 +30,8 @@ export function OptimizeResumeModal({ isOpen, onClose, onSubmit }: OptimizeResum
     resumeText: ''
   })
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [isClosing, setIsClosing] = useState(false)
   
   // File upload states
   const [uploadState, setUploadState] = useState<FileUploadState>('default')

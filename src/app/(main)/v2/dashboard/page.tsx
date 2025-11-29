@@ -50,7 +50,7 @@ function Dashboard() {
     setIsApplyModalOpen(true)
   }, [])
 
-  const handleApplySubmit = useCallback(async (data: {
+  const handleApplySubmit = useCallback(async (_data: {
     company: string
     role: string
     jobDescription: string
@@ -72,7 +72,7 @@ function Dashboard() {
     })
   }, [])
 
-  const handleOptimizeResumeSubmit = useCallback(async (data: {
+  const handleOptimizeResumeSubmit = useCallback(async (_data: {
     role: string
     resumeText: string
   }) => {
@@ -80,7 +80,7 @@ function Dashboard() {
     showToast(toast.success('Resume optimization started'))
   }, [showToast])
 
-  const handleGenerateCoverLetterSubmit = useCallback(async (data: {
+  const handleGenerateCoverLetterSubmit = useCallback(async (_data: {
     company: string
     role: string
     jobDescription: string
@@ -89,7 +89,7 @@ function Dashboard() {
     // TODO: Implement generate cover letter functionality and API integration
   }, [])
 
-  const handleAddApplicationSubmit = useCallback(async (data: {
+  const handleAddApplicationSubmit = useCallback(async (_data: {
     company: string
     role: string
     dateApplied: string

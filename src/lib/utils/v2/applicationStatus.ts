@@ -1,6 +1,5 @@
 import React from 'react'
 import { colorValues } from '@/lib/colors/v2'
-import type { ApplicationStatus } from '@/types'
 
 export const getStatusLabel = (status: string): string => {
   const statusMap: Record<string, string> = {

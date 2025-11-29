@@ -360,7 +360,7 @@ function Toolkit() {
                       onDelete={handleDeleteQuestion}
                       onEdit={handleEdit}
                       onSave={handleSave}
-                      onCopy={(id) => {
+                      onCopy={(_id) => {
                         // TODO: Implement copy functionality
                       }}
                       showDivider={index < questions.length - 1}

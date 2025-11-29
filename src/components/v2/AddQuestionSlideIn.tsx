@@ -131,8 +131,8 @@ export function AddQuestionSlideIn({
 
   const handleAddQuestion = useCallback(() => {
     setQuestions(prev => {
-      // Get current form questions (unfilled ones)
-      const currentFormQuestions = prev.filter(q => !q.isFilled)
+      // Get current form questions (unfilled ones) - filtered for validation
+      const _currentFormQuestions = prev.filter(q => !q.isFilled)
       
       // Validate current form questions - show error if question is empty
       const validated = prev.map(q => {
@@ -384,7 +384,7 @@ export function AddQuestionSlideIn({
               <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" style={{ animation: 'fadeInUp 200ms ease-out' }}>
                 <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
-                    {currentFormQuestions.map((q, index) => (
+                    {currentFormQuestions.map((q) => (
                       <div key={q.id} className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full" style={{ transition: 'opacity 200ms ease-out, transform 200ms ease-out' }}>
                         <TextField
                           label="Question"

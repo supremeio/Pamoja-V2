@@ -33,7 +33,7 @@ const ToastComponent = React.memo(function ToastComponent({
   toast,
   onClose
 }: ToastProps) {
-  const { id, type, message, duration = 5000, position = { top: 80, right: 40 } } = toast
+  const { id, type, message, duration = 5000 } = toast
   const [isVisible, setIsVisible] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
 

@@ -200,7 +200,7 @@ export default function ResultPage() {
     // Handle other actions as needed
   }, [])
 
-  const handleOptimizeResumeSubmit = useCallback(async (data: {
+  const handleOptimizeResumeSubmit = useCallback(async (_data: {
     role: string
     resumeText: string
   }) => {
