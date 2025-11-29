@@ -113,6 +113,28 @@ npm run type-check
 npm run lint
 ```
 
+## Deployment
+
+### Deploy to Vercel (Recommended - Easiest)
+
+1. Go to [Vercel](https://vercel.com) and sign in with your GitHub account
+2. Click "Add New Project"
+3. Import the `Pamoja-V2` repository
+4. Vercel will automatically detect Next.js and configure the build
+5. Click "Deploy" - your site will be live in minutes!
+
+Your site will be available at: `https://pamoja-v2.vercel.app` (or a custom domain)
+
+### Deploy to GitHub Pages
+
+1. Go to your repository settings on GitHub
+2. Navigate to "Pages" in the left sidebar
+3. Under "Source", select "GitHub Actions"
+4. The GitHub Actions workflow will automatically deploy on every push to `main`
+5. Your site will be available at: `https://supremeio.github.io/Pamoja-V2`
+
+**Note**: For GitHub Pages, you may need to enable static export in `next.config.js` if you encounter issues.
+
 ## License
 
 Private - Pamoja Resume Coach
