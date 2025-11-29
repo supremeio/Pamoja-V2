@@ -87,7 +87,7 @@ export const SideNavigation = React.memo(function SideNavigation({
                 : 'bg-v2-background-primary hover:bg-v2-background-secondary active:scale-[0.98]'
             }`} style={{ willChange: 'background-color, transform' }}>
               <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full pointer-events-none">
-                <div className="relative shrink-0 size-[16px]">
+                <div className="relative shrink-0 size-[20px]">
                   <img 
                     alt="" 
                     data-nav-icon
@@ -97,8 +97,8 @@ export const SideNavigation = React.memo(function SideNavigation({
                       filter: isDashboard ? activeFilter : inactiveFilter,
                       transition: 'filter 200ms cubic-bezier(0.4, 0, 0.2, 1)',
                       willChange: 'filter',
-                      width: '16px',
-                      height: '16px'
+                      width: '20px',
+                      height: '20px'
                     }}
                   />
                 </div>
@@ -123,7 +123,7 @@ export const SideNavigation = React.memo(function SideNavigation({
                 : 'bg-v2-background-primary hover:bg-v2-background-secondary active:scale-[0.98]'
             }`} style={{ willChange: 'background-color, transform' }}>
               <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full pointer-events-none">
-                <div className="relative shrink-0 size-[16px]">
+                <div className="relative shrink-0 size-[20px]">
                   <img 
                     alt="" 
                     data-nav-icon
@@ -133,8 +133,8 @@ export const SideNavigation = React.memo(function SideNavigation({
                       filter: isApplications ? activeFilter : inactiveFilter,
                       transition: 'filter 200ms cubic-bezier(0.4, 0, 0.2, 1)',
                       willChange: 'filter',
-                      width: '16px',
-                      height: '16px'
+                      width: '20px',
+                      height: '20px'
                     }}
                   />
                 </div>
@@ -159,7 +159,7 @@ export const SideNavigation = React.memo(function SideNavigation({
                 : 'bg-v2-background-primary hover:bg-v2-background-secondary active:scale-[0.98]'
             }`} style={{ willChange: 'background-color, transform' }}>
               <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full pointer-events-none">
-                <div className="relative shrink-0 size-[16px]">
+                <div className="relative shrink-0 size-[20px]">
                   <img 
                     alt="" 
                     data-nav-icon
@@ -169,8 +169,8 @@ export const SideNavigation = React.memo(function SideNavigation({
                       filter: isToolkit ? activeFilter : inactiveFilter,
                       transition: 'filter 200ms cubic-bezier(0.4, 0, 0.2, 1)',
                       willChange: 'filter',
-                      width: '16px',
-                      height: '16px'
+                      width: '20px',
+                      height: '20px'
                     }}
                   />
                 </div>
@@ -191,7 +191,7 @@ export const SideNavigation = React.memo(function SideNavigation({
         >
           <div className="bg-v2-background-primary hover:bg-v2-background-secondary box-border content-stretch flex flex-col gap-[10px] items-start justify-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full transition-all duration-200 ease-out active:scale-[0.98]" style={{ willChange: 'background-color, transform' }}>
             <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full pointer-events-none">
-              <div className="relative shrink-0 size-[16px]">
+              <div className="relative shrink-0 size-[20px]">
                   <img 
                     alt="" 
                     data-nav-icon
@@ -201,8 +201,8 @@ export const SideNavigation = React.memo(function SideNavigation({
                       filter: inactiveFilter,
                       transition: 'filter 200ms cubic-bezier(0.4, 0, 0.2, 1)',
                       willChange: 'filter',
-                      width: '16px',
-                      height: '16px'
+                      width: '20px',
+                      height: '20px'
                     }}
                   />
               </div>
