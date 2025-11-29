@@ -194,6 +194,11 @@ export function TextField({
   }, [])
 
   const handleIconClick = useCallback(() => {
+    // Don't allow interaction when disabled or readOnly
+    if (disabled || readOnly) {
+      return
+    }
+    
     if (dropdownOptions && dropdownOptions.length > 0) {
       if (showDropdown) {
         closeDropdown()
@@ -345,6 +350,9 @@ export function TextField({
   const renderIcon = () => {
     if (!showIcon) return null
     
+    // Match disabled text opacity (typically 0.5 for disabled state)
+    const iconOpacity = disabled || readOnly ? 0.5 : 1
+    
     return (
       <div 
         data-icon-container
@@ -354,20 +362,25 @@ export function TextField({
         )}
         onClick={(e) => {
           e.stopPropagation()
-          handleIconClick()
+          if (!disabled && !readOnly) {
+            handleIconClick()
+          }
         }}
         onMouseDown={(e) => {
           e.stopPropagation()
         }}
         style={{
           transition: 'opacity 200ms cubic-bezier(0.4, 0, 0.2, 1)',
-          pointerEvents: 'auto'
+          pointerEvents: disabled || readOnly ? 'none' : 'auto'
         }}
       >
         <img 
           alt="" 
           className="block max-w-none size-full transition-opacity duration-200 ease-in-out" 
           src={icon}
+          style={{
+            opacity: iconOpacity
+          }}
         />
       </div>
     )
@@ -576,12 +589,14 @@ export function TextField({
       {/* Label + Input Frame */}
       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
         {/* Label */}
-        <p 
-          className="font-['Figtree:Medium',sans-serif] leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full"
-          style={fontMedium}
-        >
-          {label}
-        </p>
+        {label && (
+          <p 
+            className="font-['Figtree:Medium',sans-serif] leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full"
+            style={fontMedium}
+          >
+            {label}
+          </p>
+        )}
 
         {/* Input Frame */}
         <div 

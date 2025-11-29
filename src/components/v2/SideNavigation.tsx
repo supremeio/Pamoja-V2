@@ -10,6 +10,7 @@ const fontMedium = typography.medium
 
 // Icon assets from local icon library
 const img = "/icons/v2/dashboard-icon.svg" // Dashboard icon
+const imgAutoPilot = "/icons/v2/Launch icon.svg" // Auto-pilot/AI agent icon
 const img1 = "/icons/v2/applications-menu-icon.svg" // Applications icon
 const img2 = "/icons/v2/documents-icon.svg" // Toolkit icon
 const img3 = "/icons/v2/email-icon.svg" // Contact us/email icon
@@ -51,10 +52,11 @@ export const SideNavigation = React.memo(function SideNavigation({
   email = 'supremeux@gmail.com'
 }: SideNavigationProps) {
   const pathname = usePathname()
-  const { isDashboard, isApplications, isToolkit } = useMemo(() => {
-    if (!pathname) return { isDashboard: false, isApplications: false, isToolkit: false }
+  const { isDashboard, isAutoPilot, isApplications, isToolkit } = useMemo(() => {
+    if (!pathname) return { isDashboard: false, isAutoPilot: false, isApplications: false, isToolkit: false }
     return {
       isDashboard: pathname === '/v2/dashboard',
+      isAutoPilot: pathname === '/v2/ai-agent',
       isApplications: pathname === '/v2/applications',
       isToolkit: pathname === '/v2/toolkit'
     }
@@ -106,6 +108,42 @@ export const SideNavigation = React.memo(function SideNavigation({
                   isDashboard ? 'text-v2-text-primary' : 'text-v2-text-muted group-hover:text-v2-text-primary'
                 }`} style={fontMedium}>
                   Dashboard
+                </p>
+              </div>
+            </div>
+          </Link>
+          <Link 
+            href="/v2/ai-agent" 
+            className="w-full cursor-pointer block group" 
+            prefetch={true}
+            aria-label="Navigate to Auto-pilot"
+            aria-current={isAutoPilot ? 'page' : undefined}
+          >
+            <div className={`box-border content-stretch flex flex-col items-start justify-center px-[12px] py-[8px] relative rounded-[8px] shrink-0 w-full transition-all duration-200 ease-out ${
+              isAutoPilot 
+                ? 'bg-v2-background-secondary' 
+                : 'bg-v2-background-primary hover:bg-v2-background-secondary active:scale-[0.98]'
+            }`} style={{ willChange: 'background-color, transform' }}>
+              <div className="content-stretch flex gap-[8px] items-center relative shrink-0 w-full pointer-events-none">
+                <div className="relative shrink-0 size-[20px]">
+                  <img 
+                    alt="" 
+                    data-nav-icon
+                    className="block max-w-none size-full" 
+                    src={imgAutoPilot}
+                    style={{
+                      filter: isAutoPilot ? activeFilter : inactiveFilter,
+                      transition: 'filter 200ms cubic-bezier(0.4, 0, 0.2, 1)',
+                      willChange: 'filter',
+                      width: '20px',
+                      height: '20px'
+                    }}
+                  />
+                </div>
+                <p className={`leading-[1.7] not-italic relative shrink-0 text-[14px] text-nowrap whitespace-pre transition-colors duration-200 ease-out ${
+                  isAutoPilot ? 'text-v2-text-primary' : 'text-v2-text-muted group-hover:text-v2-text-primary'
+                }`} style={fontMedium}>
+                  Auto-pilot
                 </p>
               </div>
             </div>

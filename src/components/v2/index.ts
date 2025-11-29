@@ -24,4 +24,6 @@ export { QuickActionMenu } from './QuickActionMenu'
 export { ResumeUploadSection } from './ResumeUploadSection'
 export { AddAnotherQuestionButton } from './AddAnotherQuestionButton'
 export { ErrorBoundary } from './ErrorBoundary'
+export { SetUpAIAgentModal } from './SetUpAIAgentModal'
+export { Checkbox } from './Checkbox'
 

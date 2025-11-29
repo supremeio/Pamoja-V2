@@ -221,10 +221,12 @@ export const FileUpload = React.memo(function FileUpload({
             gap: spacing.sm,
             paddingLeft: spacing.xl,
             paddingRight: spacing.xl,
-            paddingTop: spacing.md,
-            paddingBottom: spacing.md,
+            paddingTop: '12px',
+            paddingBottom: '12px',
             borderRadius: sizes.borderRadius.md,
-            width: '228px' // Specific design width - could be moved to sizes if reused
+            width: '228px',
+            height: '44px',
+            minHeight: '44px'
           }}
           onClick={handleClick}
           onMouseDown={(e) => {
@@ -248,8 +250,8 @@ export const FileUpload = React.memo(function FileUpload({
 
       {state === 'uploading' && (
         <div
-          className={`bg-v2-background-primary border border-solid box-border content-stretch flex items-center justify-between ${fullWidth ? 'p-[16px]' : 'pl-[16px] pr-[12px] py-[8px]'} relative rounded-[8px] shrink-0 transition-all duration-300 ease-in-out ${fullWidth ? 'w-full' : ''}`}
-          style={{ ...containerStyle, ...(fullWidth ? {} : { width: '228px' }) }}
+          className={`bg-v2-background-primary border border-solid box-border content-stretch flex items-center justify-between ${fullWidth ? 'p-[16px]' : 'pl-[16px] pr-[12px] py-[12px]'} relative rounded-[8px] shrink-0 transition-all duration-300 ease-in-out ${fullWidth ? 'w-full' : ''}`}
+          style={{ ...containerStyle, ...(fullWidth ? {} : { width: '228px', height: '44px', minHeight: '44px' }) }}
         >
           <div className="basis-0 content-stretch flex gap-[4px] grow items-center min-h-px min-w-px relative shrink-0 overflow-hidden">
             <div className="relative shrink-0 size-[20px] animate-spin">
@@ -279,8 +281,8 @@ export const FileUpload = React.memo(function FileUpload({
 
       {state === 'uploaded' && (
         <div
-          className="bg-v2-background-primary border border-solid box-border content-stretch flex items-center justify-between pl-[16px] pr-[12px] py-[8px] relative rounded-[8px] shrink-0 transition-all duration-300 ease-in-out"
-          style={{ ...containerStyle, width: '228px' }}
+          className="bg-v2-background-primary border border-solid box-border content-stretch flex items-center justify-between pl-[16px] pr-[12px] py-[12px] relative rounded-[8px] shrink-0 transition-all duration-300 ease-in-out"
+          style={{ ...containerStyle, width: '228px', height: '44px', minHeight: '44px' }}
         >
           <div className="basis-0 content-stretch flex gap-[4px] grow items-center min-h-px min-w-px relative shrink-0 overflow-hidden">
             <div className="relative shrink-0 size-[20px]">
@@ -316,8 +318,8 @@ export const FileUpload = React.memo(function FileUpload({
       {state === 'error' && (
         <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0" style={{ width: '228px' }}>
           <div
-            className="bg-v2-background-primary border border-solid box-border content-stretch flex items-center justify-between pl-[16px] pr-[12px] py-[8px] relative rounded-[8px] shrink-0 transition-all duration-300 ease-in-out"
-            style={{ ...containerStyle, width: '228px' }}
+            className="bg-v2-background-primary border border-solid box-border content-stretch flex items-center justify-between pl-[16px] pr-[12px] py-[12px] relative rounded-[8px] shrink-0 transition-all duration-300 ease-in-out"
+            style={{ ...containerStyle, width: '228px', height: '44px', minHeight: '44px' }}
           >
             <div className="basis-0 content-stretch flex gap-[4px] grow items-center min-h-px min-w-px relative shrink-0 overflow-hidden">
               <div className="relative shrink-0 size-[20px]">
