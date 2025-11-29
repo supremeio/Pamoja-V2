@@ -44,7 +44,6 @@ export function OptimizeResumeModal({ isOpen, onClose, onSubmit }: OptimizeResum
   useEffect(() => {
     if (isOpen) {
       setIsMounted(true)
-      setIsSubmitting(false)
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           setIsAnimating(true)
@@ -67,7 +66,6 @@ export function OptimizeResumeModal({ isOpen, onClose, onSubmit }: OptimizeResum
   }, [])
 
   const handleSubmit = useCallback(async () => {
-    setIsSubmitting(true)
     onSubmit?.(formData)
     // TODO: Call API and handle loading states
   }, [formData, onSubmit])
