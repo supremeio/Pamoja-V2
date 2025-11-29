@@ -559,7 +559,10 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
                         {/* Resume */}
                         {uploadedFileName && (
-                          <div className="border-[0px_0px_1px] border-v2-border border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
+                          <div 
+                            className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
+                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
+                          >
                             <p
                               className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
                               style={fontMedium}
@@ -594,7 +597,10 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
 
                         {/* Target Role */}
                         {preferences.jobRole && (
-                          <div className="border-[0px_0px_1px] border-v2-border border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
+                          <div 
+                            className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
+                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
+                          >
                             <p
                               className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
                               style={fontMedium}
@@ -613,31 +619,59 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                         )}
 
                         {/* Locations */}
-                        <div className="border-[0px_0px_1px] border-v2-border border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
-                          <p
-                            className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
-                            style={fontMedium}
+                        {(preferences.location || preferences.workTypes.length > 0) && (
+                          <div 
+                            className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
+                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
                           >
-                            Locations
-                          </p>
-                          <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
                             <p
-                              className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                              className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
                               style={fontMedium}
                             >
-                              {preferences.workTypes
-                                .map(type => {
-                                  const formatted =
-                                    type.charAt(0).toUpperCase() + type.slice(1).replace('-', '-')
-                                  return formatted === 'On-site' ? 'On-site' : formatted
-                                })
-                                .join(', ')}
-                              {preferences.location && preferences.workTypes.length > 0 && ', '}
-                              {preferences.location &&
-                                getLabelFromValue(preferences.location, locationOptions)}
+                              Locations
                             </p>
+                            <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
+                              <p
+                                className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                                style={fontMedium}
+                              >
+                                {preferences.workTypes
+                                  .map(type => {
+                                    const formatted =
+                                      type.charAt(0).toUpperCase() + type.slice(1).replace('-', '-')
+                                    return formatted === 'On-site' ? 'On-site' : formatted
+                                  })
+                                  .join(', ')}
+                                {preferences.location && preferences.workTypes.length > 0 && ', '}
+                                {preferences.location &&
+                                  getLabelFromValue(preferences.location, locationOptions)}
+                              </p>
+                            </div>
                           </div>
-                        </div>
+                        )}
+
+                        {/* Salary Range */}
+                        {preferences.salaryRange && (
+                          <div 
+                            className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
+                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
+                          >
+                            <p
+                              className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
+                              style={fontMedium}
+                            >
+                              Salary range
+                            </p>
+                            <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
+                              <p
+                                className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                                style={fontMedium}
+                              >
+                                {getLabelFromValue(preferences.salaryRange, salaryRangeOptions)}
+                              </p>
+                            </div>
+                          </div>
+                        )}
 
                         {/* Credits */}
                         <div className="box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
