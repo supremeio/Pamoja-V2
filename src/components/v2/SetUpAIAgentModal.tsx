@@ -13,12 +13,12 @@ const fontMedium = typography.medium
 const fontSemibold = typography.semibold
 
 // Icon assets from local icon library
-const imgCloseIcon = "/icons/v2/close-icon.svg"
-const imgArrowRight = "/icons/v2/Button arrow roght.svg"
-const imgArrowLeft = "/icons/v2/Button arrow left.svg"
-const imgCheckIcon = "/icons/v2/check-icon.svg"
-const imgLaunchIcon = "/icons/v2/Launch icon.svg"
-const imgFlashIcon = "/icons/v2/quick-icon.svg"
+const imgCloseIcon = '/icons/v2/close-icon.svg'
+const imgArrowRight = '/icons/v2/Button arrow roght.svg'
+const imgArrowLeft = '/icons/v2/Button arrow left.svg'
+const imgCheckIcon = '/icons/v2/check-icon.svg'
+const imgLaunchIcon = '/icons/v2/Launch icon.svg'
+const imgFlashIcon = '/icons/v2/quick-icon.svg'
 
 interface SetUpAIAgentModalProps {
   isOpen: boolean
@@ -33,7 +33,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
   const [isAnimating, setIsAnimating] = useState(false)
   const [currentStage, setCurrentStage] = useState<SetupStage>(1)
   const [isStageTransitioning, setIsStageTransitioning] = useState(false)
-  
+
   // Stage 1: Resume upload
   const [uploadState, setUploadState] = useState<FileUploadState>('default')
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -46,14 +46,17 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
     jobRole: '',
     location: '',
     salaryRange: '',
-    workTypes: ['remote', 'on-site'] as string[] // Default: Remote and On-site checked
+    workTypes: ['remote', 'on-site'] as string[], // Default: Remote and On-site checked
   })
 
   // Helper to get label from value
-  const getLabelFromValue = useCallback((value: string, options: Array<{ label: string; value: string }>) => {
-    const option = options.find(opt => opt.value === value)
-    return option ? option.label : value
-  }, [])
+  const getLabelFromValue = useCallback(
+    (value: string, options: Array<{ label: string; value: string }>) => {
+      const option = options.find(opt => opt.value === value)
+      return option ? option.label : value
+    },
+    []
+  )
 
   const jobRoleOptions = [
     { label: 'Software Engineer', value: 'software-engineer' },
@@ -73,7 +76,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
     { label: 'Project Manager', value: 'project-manager' },
     { label: 'HR Manager', value: 'hr-manager' },
     { label: 'Operations Manager', value: 'operations-manager' },
-    { label: 'Other', value: 'other' }
+    { label: 'Other', value: 'other' },
   ]
 
   const locationOptions = [
@@ -87,7 +90,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
     { label: 'Boston, MA', value: 'boston' },
     { label: 'London, UK', value: 'london' },
     { label: 'Toronto, Canada', value: 'toronto' },
-    { label: 'Other', value: 'other' }
+    { label: 'Other', value: 'other' },
   ]
 
   const salaryRangeOptions = [
@@ -98,9 +101,8 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
     { label: '$150k - $175k', value: '150-175k' },
     { label: '$175k - $200k', value: '175-200k' },
     { label: '$200k+', value: '200k-plus' },
-    { label: 'Not specified', value: 'not-specified' }
+    { label: 'Not specified', value: 'not-specified' },
   ]
-
 
   useEffect(() => {
     if (isOpen) {
@@ -115,7 +117,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
         jobRole: '',
         location: '',
         salaryRange: '',
-        workTypes: ['remote', 'on-site']
+        workTypes: ['remote', 'on-site'],
       })
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -153,7 +155,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
     // Validate file type
     const validExtensions = ['.pdf', '.doc', '.docx']
     const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase()
-    
+
     if (!validExtensions.includes(fileExtension)) {
       setUploadError('Please upload a PDF or DOC file')
       setUploadState('error')
@@ -238,66 +240,70 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
     if (currentStage > 1) {
       setIsStageTransitioning(true)
       setTimeout(() => {
-        setCurrentStage((prev) => (prev - 1) as SetupStage)
+        setCurrentStage(prev => (prev - 1) as SetupStage)
         setIsStageTransitioning(false)
       }, 150)
     }
   }, [currentStage])
 
-  const overlayStyle: React.CSSProperties = { 
+  const overlayStyle: React.CSSProperties = {
     backgroundColor: colorValues.overlay,
     opacity: isAnimating ? 1 : 0,
     transition: isMounted ? createTransition(['opacity'], 'slow') : 'none',
     pointerEvents: (isAnimating ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],
-    visibility: (isMounted ? 'visible' : 'hidden') as React.CSSProperties['visibility']
+    visibility: (isMounted ? 'visible' : 'hidden') as React.CSSProperties['visibility'],
   }
-  
-  const modalLeftStyle: React.CSSProperties = { 
+
+  const modalLeftStyle: React.CSSProperties = {
     left: 'calc(100vw - 480px - 24px)',
     transform: isAnimating ? 'translateX(0)' : 'translateX(100%)',
-    transition: isMounted ? 'transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms cubic-bezier(0.16, 1, 0.3, 1)' : 'none',
+    transition: isMounted
+      ? 'transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms cubic-bezier(0.16, 1, 0.3, 1)'
+      : 'none',
     opacity: isAnimating ? 1 : 0,
     pointerEvents: (isAnimating ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],
     visibility: (isMounted ? 'visible' : 'hidden') as React.CSSProperties['visibility'],
-    willChange: 'transform, opacity'
+    willChange: 'transform, opacity',
   }
 
   // Stage content transition for smooth flow
   const stageContentStyle: React.CSSProperties = {
     opacity: isAnimating && !isStageTransitioning ? 1 : 0,
-    transition: 'opacity 150ms cubic-bezier(0.4, 0, 0.2, 1)'
+    transition: 'opacity 150ms cubic-bezier(0.4, 0, 0.2, 1)',
   }
 
   if (!isMounted) {
     return null
   }
 
-  const canContinue = 
+  const canContinue =
     (currentStage === 1 && uploadState === 'uploaded' && uploadedFileName) ||
     (currentStage === 2 && preferences.jobRole) ||
-    (currentStage === 3)
+    currentStage === 3
 
   return (
     <>
-      <div 
-        className="fixed inset-0"
-        style={{ ...overlayStyle, zIndex: 9999 }}
-        onClick={onClose}
-      />
-      <div 
+      <div className="fixed inset-0" style={{ ...overlayStyle, zIndex: 9999 }} onClick={onClose} />
+      <div
         className="fixed bg-v2-background-primary border border-v2-border border-solid box-border flex flex-col right-0 top-[24px] bottom-[24px] rounded-[12px] w-[480px]"
         style={{ ...modalLeftStyle, zIndex: 10000 }}
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         <div className="content-stretch flex flex-col gap-[40px] items-end p-[16px] relative shrink-0 w-full">
           <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
             {/* Header */}
             <div className="content-stretch flex items-start justify-between relative shrink-0 w-full">
               <div className="basis-0 content-stretch flex flex-col gap-[4px] grow items-start min-h-px min-w-px not-italic relative shrink-0">
-                <p className="leading-[28px] relative shrink-0 text-[18px] text-v2-text-primary w-full" style={fontSemibold}>
+                <p
+                  className="leading-[28px] relative shrink-0 text-[18px] text-v2-text-primary w-full"
+                  style={fontSemibold}
+                >
                   Set up AI agent
                 </p>
-                <p className="leading-[20px] relative shrink-0 text-[14px] text-v2-text-secondary w-full" style={fontMedium}>
+                <p
+                  className="leading-[20px] relative shrink-0 text-[14px] text-v2-text-secondary w-full"
+                  style={fontMedium}
+                >
                   Our AI will analyze your experience, skills, and career goals
                 </p>
               </div>
@@ -314,20 +320,44 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
             {/* Progress indicator */}
             <div className="box-border content-stretch flex flex-col gap-[12px] items-start px-0 py-[24px] relative shrink-0 w-full">
               <div className="content-stretch flex gap-[8px] items-center relative shrink-0">
-                <div 
+                <div
                   className="h-[8px] rounded-[40px] shrink-0 w-[54px]"
-                  style={{ backgroundColor: currentStage >= 1 ? (currentStage === 3 ? '#123520' : (currentStage === 1 ? colorValues.success.primary : '#123520')) : colorValues.background.secondary }}
+                  style={{
+                    backgroundColor:
+                      currentStage >= 1
+                        ? currentStage === 3
+                          ? '#123520'
+                          : currentStage === 1
+                            ? colorValues.success.primary
+                            : '#123520'
+                        : colorValues.background.secondary,
+                  }}
                 />
-                <div 
+                <div
                   className="h-[8px] rounded-[40px] shrink-0 w-[54px]"
-                  style={{ backgroundColor: currentStage >= 2 ? (currentStage === 3 ? '#123520' : colorValues.success.primary) : colorValues.background.secondary }}
+                  style={{
+                    backgroundColor:
+                      currentStage >= 2
+                        ? currentStage === 3
+                          ? '#123520'
+                          : colorValues.success.primary
+                        : colorValues.background.secondary,
+                  }}
                 />
-                <div 
+                <div
                   className="h-[8px] rounded-[40px] shrink-0 w-[54px]"
-                  style={{ backgroundColor: currentStage >= 3 ? colorValues.success.primary : colorValues.background.secondary }}
+                  style={{
+                    backgroundColor:
+                      currentStage >= 3
+                        ? colorValues.success.primary
+                        : colorValues.background.secondary,
+                  }}
                 />
               </div>
-              <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-nowrap text-v2-text-primary whitespace-pre" style={fontMedium}>
+              <p
+                className="leading-[20px] not-italic relative shrink-0 text-[14px] text-nowrap text-v2-text-primary whitespace-pre"
+                style={fontMedium}
+              >
                 {currentStage === 1 && 'Upload your resume'}
                 {currentStage === 2 && 'Set your job preferences'}
                 {currentStage === 3 && 'Launch AI agent'}
@@ -335,12 +365,18 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
             </div>
 
             {/* Stage content */}
-            <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full" style={stageContentStyle}>
+            <div
+              className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full"
+              style={stageContentStyle}
+            >
               {currentStage === 1 && (
                 <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
                   <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
                     <div className="bg-v2-background-primary border border-v2-border border-solid box-border content-stretch flex flex-col gap-[16px] items-start p-[16px] relative rounded-[12px] shrink-0 w-full">
-                      <p className="leading-[28px] not-italic relative shrink-0 text-[18px] text-v2-text-primary text-nowrap whitespace-pre" style={fontSemibold}>
+                      <p
+                        className="leading-[28px] not-italic relative shrink-0 text-[18px] text-v2-text-primary text-nowrap whitespace-pre"
+                        style={fontSemibold}
+                      >
                         Your resume
                       </p>
                       <div className="content-stretch flex flex-col gap-[16px] items-start relative shrink-0 w-full">
@@ -366,18 +402,21 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                   <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
                     {/* Target role */}
                     <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-                      <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full" style={fontMedium}>
+                      <p
+                        className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full"
+                        style={fontMedium}
+                      >
                         Target role
                       </p>
                       <TextField
                         label=""
                         placeholder="Select role(s)"
                         value={preferences.jobRole}
-                        onChange={(value) => handlePreferenceChange('jobRole', value)}
+                        onChange={value => handlePreferenceChange('jobRole', value)}
                         variant="dropdown"
                         width="100%"
                         dropdownOptions={jobRoleOptions}
-                        onDropdownSelect={(value) => handlePreferenceChange('jobRole', value)}
+                        onDropdownSelect={value => handlePreferenceChange('jobRole', value)}
                         showHelperText={false}
                       />
                     </div>
@@ -385,29 +424,38 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                     {/* Work arrangement checkboxes */}
                     <div className="content-stretch flex gap-[24px] items-start relative shrink-0">
                       <div className="content-stretch flex gap-[8px] items-start relative shrink-0">
-                        <Checkbox 
+                        <Checkbox
                           checked={preferences.workTypes.includes('remote')}
                           onChange={() => handleWorkTypeToggle('remote')}
                         />
-                        <p className="leading-[24px] not-italic relative shrink-0 text-[15px] text-v2-text-muted text-nowrap tracking-[-0.15px] whitespace-pre" style={fontMedium}>
+                        <p
+                          className="leading-[24px] not-italic relative shrink-0 text-[15px] text-v2-text-muted text-nowrap tracking-[-0.15px] whitespace-pre"
+                          style={fontMedium}
+                        >
                           Remote
                         </p>
                       </div>
                       <div className="content-stretch flex gap-[8px] items-start relative shrink-0">
-                        <Checkbox 
+                        <Checkbox
                           checked={preferences.workTypes.includes('on-site')}
                           onChange={() => handleWorkTypeToggle('on-site')}
                         />
-                        <p className="leading-[24px] not-italic relative shrink-0 text-[15px] text-v2-text-muted text-nowrap tracking-[-0.15px] whitespace-pre" style={fontMedium}>
+                        <p
+                          className="leading-[24px] not-italic relative shrink-0 text-[15px] text-v2-text-muted text-nowrap tracking-[-0.15px] whitespace-pre"
+                          style={fontMedium}
+                        >
                           On-site
                         </p>
                       </div>
                       <div className="content-stretch flex gap-[8px] items-start relative shrink-0">
-                        <Checkbox 
+                        <Checkbox
                           checked={preferences.workTypes.includes('hybrid')}
                           onChange={() => handleWorkTypeToggle('hybrid')}
                         />
-                        <p className="leading-[24px] not-italic relative shrink-0 text-[15px] text-v2-text-muted text-nowrap tracking-[-0.15px] whitespace-pre" style={fontMedium}>
+                        <p
+                          className="leading-[24px] not-italic relative shrink-0 text-[15px] text-v2-text-muted text-nowrap tracking-[-0.15px] whitespace-pre"
+                          style={fontMedium}
+                        >
                           Hybrid
                         </p>
                       </div>
@@ -415,37 +463,46 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
 
                     {/* Preferred locations */}
                     <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-                      <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full" style={fontMedium}>
+                      <p
+                        className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full"
+                        style={fontMedium}
+                      >
                         Preferred locations
                       </p>
                       <TextField
                         label=""
                         placeholder="Select location"
                         value={preferences.location}
-                        onChange={(value) => handlePreferenceChange('location', value)}
+                        onChange={value => handlePreferenceChange('location', value)}
                         variant="dropdown"
                         width="100%"
                         dropdownOptions={locationOptions}
-                        onDropdownSelect={(value) => handlePreferenceChange('location', value)}
+                        onDropdownSelect={value => handlePreferenceChange('location', value)}
                         showHelperText={false}
-                        disabled={preferences.workTypes.length === 1 && preferences.workTypes.includes('remote')}
+                        disabled={
+                          preferences.workTypes.length === 1 &&
+                          preferences.workTypes.includes('remote')
+                        }
                       />
                     </div>
 
                     {/* Salary range */}
                     <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-                      <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full" style={fontMedium}>
+                      <p
+                        className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-muted w-full"
+                        style={fontMedium}
+                      >
                         Salary range
                       </p>
                       <TextField
                         label=""
                         placeholder="E.g, $120K - $180K"
                         value={preferences.salaryRange}
-                        onChange={(value) => handlePreferenceChange('salaryRange', value)}
+                        onChange={value => handlePreferenceChange('salaryRange', value)}
                         variant="dropdown"
                         width="100%"
                         dropdownOptions={salaryRangeOptions}
-                        onDropdownSelect={(value) => handlePreferenceChange('salaryRange', value)}
+                        onDropdownSelect={value => handlePreferenceChange('salaryRange', value)}
                         showHelperText={false}
                       />
                     </div>
@@ -459,23 +516,29 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                   <div className="content-stretch flex flex-col gap-[8px] items-center relative shrink-0">
                     {/* Flash Icon */}
                     <div className="overflow-clip relative shrink-0 size-[40px]">
-                      <img 
-                        alt="" 
-                        className="block max-w-none size-full" 
+                      <img
+                        alt=""
+                        className="block max-w-none size-full"
                         src={imgFlashIcon}
-                        style={{ 
+                        style={{
                           filter: iconFilters.greenCheck,
                           width: '40px',
-                          height: '40px'
+                          height: '40px',
                         }}
                       />
                     </div>
                     {/* Success Text */}
                     <div className="content-stretch flex flex-col gap-[4px] items-center relative shrink-0">
-                      <p className="leading-[28px] not-italic relative shrink-0 text-[18px] text-v2-text-primary text-nowrap whitespace-pre" style={fontSemibold}>
+                      <p
+                        className="leading-[28px] not-italic relative shrink-0 text-[18px] text-v2-text-primary text-nowrap whitespace-pre"
+                        style={fontSemibold}
+                      >
                         You're all set!
                       </p>
-                      <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-center" style={fontMedium}>
+                      <p
+                        className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-center"
+                        style={fontMedium}
+                      >
                         Your AI agent is ready to start finding and applying to jobs
                       </p>
                     </div>
@@ -485,33 +548,45 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                   <div className="box-border content-stretch flex flex-col gap-[10px] items-start px-0 py-[24px] relative shrink-0 w-full">
                     <div className="bg-v2-background-secondary box-border content-stretch flex flex-col gap-[8px] items-start justify-center p-[24px] relative rounded-[8px] shrink-0 w-full">
                       {/* Header */}
-                      <p className="leading-[1.7] not-italic relative shrink-0 text-[14px] text-nowrap uppercase whitespace-pre" style={{ ...fontMedium, color: colorValues.status.offer.text }}>
+                      <p
+                        className="leading-[1.7] not-italic relative shrink-0 text-[14px] text-nowrap uppercase whitespace-pre"
+                        style={{ ...fontMedium, color: colorValues.status.offer.text }}
+                      >
                         Setup Summary
                       </p>
-                      
+
                       {/* Summary Items */}
                       <div className="content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
                         {/* Resume */}
                         {uploadedFileName && (
                           <div className="border-[0px_0px_1px] border-v2-border border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
-                            <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre" style={fontMedium}>
+                            <p
+                              className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
+                              style={fontMedium}
+                            >
                               Resume
                             </p>
                             <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
-                              <div className="overflow-clip relative shrink-0" style={{ width: '20px', height: '20px' }}>
-                                <img 
-                                  alt="" 
-                                  className="block max-w-none" 
-                                  src={imgCheckIcon} 
-                                  style={{ 
-                                    width: '20px', 
+                              <div
+                                className="overflow-clip relative shrink-0"
+                                style={{ width: '20px', height: '20px' }}
+                              >
+                                <img
+                                  alt=""
+                                  className="block max-w-none"
+                                  src={imgCheckIcon}
+                                  style={{
+                                    width: '20px',
                                     height: '20px',
-                                    filter: iconFilters.greenCheck
-                                  }} 
+                                    filter: iconFilters.greenCheck,
+                                  }}
                                 />
                               </div>
-                              <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
-                                Uploaded
+                              <p
+                                className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                                style={fontMedium}
+                              >
+                                {uploadedFileName}
                               </p>
                             </div>
                           </div>
@@ -520,11 +595,17 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                         {/* Target Role */}
                         {preferences.jobRole && (
                           <div className="border-[0px_0px_1px] border-v2-border border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
-                            <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre" style={fontMedium}>
+                            <p
+                              className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
+                              style={fontMedium}
+                            >
                               Target
                             </p>
                             <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
-                              <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
+                              <p
+                                className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                                style={fontMedium}
+                              >
                                 {getLabelFromValue(preferences.jobRole, jobRoleOptions)}
                               </p>
                             </div>
@@ -533,28 +614,44 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
 
                         {/* Locations */}
                         <div className="border-[0px_0px_1px] border-v2-border border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
-                          <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre" style={fontMedium}>
+                          <p
+                            className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
+                            style={fontMedium}
+                          >
                             Locations
                           </p>
                           <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
-                            <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
-                              {preferences.workTypes.map(type => {
-                                const formatted = type.charAt(0).toUpperCase() + type.slice(1).replace('-', '-')
-                                return formatted === 'On-site' ? 'On-site' : formatted
-                              }).join(', ')}
+                            <p
+                              className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                              style={fontMedium}
+                            >
+                              {preferences.workTypes
+                                .map(type => {
+                                  const formatted =
+                                    type.charAt(0).toUpperCase() + type.slice(1).replace('-', '-')
+                                  return formatted === 'On-site' ? 'On-site' : formatted
+                                })
+                                .join(', ')}
                               {preferences.location && preferences.workTypes.length > 0 && ', '}
-                              {preferences.location && getLabelFromValue(preferences.location, locationOptions)}
+                              {preferences.location &&
+                                getLabelFromValue(preferences.location, locationOptions)}
                             </p>
                           </div>
                         </div>
 
                         {/* Credits */}
                         <div className="box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full">
-                          <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre" style={fontMedium}>
+                          <p
+                            className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
+                            style={fontMedium}
+                          >
                             Credits available
                           </p>
                           <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
-                            <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-nowrap whitespace-pre" style={{ ...fontMedium, color: colorValues.success.primary }}>
+                            <p
+                              className="leading-[20px] not-italic relative shrink-0 text-[14px] text-nowrap whitespace-pre"
+                              style={{ ...fontMedium, color: colorValues.success.primary }}
+                            >
                               500 credits
                             </p>
                           </div>
@@ -580,7 +677,10 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                     <img alt="" className="block max-w-none size-full" src={imgArrowLeft} />
                   </div>
                 </div>
-                <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
+                <p
+                  className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                  style={fontMedium}
+                >
                   Back
                 </p>
               </button>
@@ -594,7 +694,10 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                 <div className="overflow-clip relative shrink-0 size-[20px]">
                   <img alt="" className="block max-w-none size-full" src={imgLaunchIcon} />
                 </div>
-                <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
+                <p
+                  className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                  style={fontMedium}
+                >
                   Launch AI agent
                 </p>
               </button>
@@ -605,7 +708,10 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                 className="bg-v2-brand-primary box-border content-stretch flex gap-[4px] items-center justify-center px-[16px] py-[12px] relative rounded-[8px] shrink-0 cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
                 style={{ willChange: 'opacity' }}
               >
-                <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
+                <p
+                  className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre"
+                  style={fontMedium}
+                >
                   Continue
                 </p>
                 <div className="relative shrink-0 size-[20px]">
@@ -621,4 +727,3 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
     </>
   )
 }
-
