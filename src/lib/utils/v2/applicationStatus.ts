@@ -1,7 +1,6 @@
 import React from 'react'
 import { colorValues } from '@/lib/colors/v2'
-
-export type ApplicationStatus = 'applied' | 'interview' | 'rejected' | 'offer' | 'accepted'
+import type { ApplicationStatus } from '@/types'
 
 export const getStatusLabel = (status: string): string => {
   const statusMap: Record<string, string> = {
