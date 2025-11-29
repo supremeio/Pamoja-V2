@@ -157,7 +157,7 @@ export function ApplicationActionsMenu({
                   }}
                 />
               </div>
-              <p className="leading-[1.7] not-italic relative shrink-0 group-hover:text-v2-text-primary text-[14px] text-nowrap whitespace-pre transition-colors duration-200 ease-out" style={{ ...fontMedium, color: colorValues.status.error }}>
+              <p className="leading-[1.7] not-italic relative shrink-0 group-hover:text-v2-text-primary text-[14px] text-nowrap whitespace-pre transition-colors duration-200 ease-out" style={{ ...fontMedium, color: colorValues.text.error }}>
                 Delete application
               </p>
             </div>
