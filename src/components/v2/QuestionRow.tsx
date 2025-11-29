@@ -245,7 +245,7 @@ export const QuestionRow = React.memo(function QuestionRow({
       <div
         className="box-border content-stretch flex flex-col items-start justify-center relative shrink-0 w-full group"
         style={{
-          backgroundColor: colorValues.background.secondary,
+          backgroundColor: 'rgba(255, 255, 255, 0.02)',
           padding: spacing.lg,
           borderRadius: sizes.borderRadius.md,
           ...rowStyle,
