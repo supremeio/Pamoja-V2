@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { TextField } from './TextField'
 import { typography } from '@/lib/typography/v2'
 import { colorValues } from '@/lib/colors/v2'
