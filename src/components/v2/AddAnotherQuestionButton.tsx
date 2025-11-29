@@ -16,15 +16,36 @@ export function AddAnotherQuestionButton({ onClick }: AddAnotherQuestionButtonPr
       style={{ willChange: 'transform' }}
     >
       <div className="relative shrink-0 size-[20px]">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="block max-w-none size-full">
-          <path d="M5 10H15" stroke="#ffffff" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
-          <path d="M10 15V5" stroke="#ffffff" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="block max-w-none size-full"
+        >
+          <path
+            d="M5 10H15"
+            stroke="#ffffff"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M10 15V5"
+            stroke="#ffffff"
+            strokeWidth="1.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </div>
-      <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-button text-nowrap whitespace-pre" style={fontMedium}>
+      <p
+        className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-button text-nowrap whitespace-pre"
+        style={fontMedium}
+      >
         Add another question
       </p>
     </button>
   )
 }
-

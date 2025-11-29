@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colorValues, iconFilters } from '@/lib/colors/v2'
 import { createTransition } from '@/lib/transitions/v2'
 import { FileUpload, FileUploadState } from './FileUpload'
 import { Separator } from './Separator'
@@ -14,11 +14,11 @@ const fontSemibold = typography.semibold
 
 // Icon assets from local icon library
 const imgCloseIcon = "/icons/v2/close-icon.svg"
-const imgDocumentsIcon = "/icons/v2/documents-icon.svg"
 const imgArrowRight = "/icons/v2/Button arrow roght.svg"
 const imgArrowLeft = "/icons/v2/Button arrow left.svg"
 const imgCheckIcon = "/icons/v2/check-icon.svg"
 const imgLaunchIcon = "/icons/v2/Launch icon.svg"
+const imgFlashIcon = "/icons/v2/quick-icon.svg"
 
 interface SetUpAIAgentModalProps {
   isOpen: boolean
@@ -457,9 +457,18 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                 <div className="content-stretch flex flex-col gap-[8px] items-center relative shrink-0 w-full">
                   {/* Success Message Section */}
                   <div className="content-stretch flex flex-col gap-[8px] items-center relative shrink-0">
-                    {/* Checkmark Icon */}
+                    {/* Flash Icon */}
                     <div className="overflow-clip relative shrink-0 size-[40px]">
-                      <img alt="" className="block max-w-none size-full" src={imgCheckIcon} />
+                      <img 
+                        alt="" 
+                        className="block max-w-none size-full" 
+                        src={imgFlashIcon}
+                        style={{ 
+                          filter: iconFilters.greenCheck,
+                          width: '40px',
+                          height: '40px'
+                        }}
+                      />
                     </div>
                     {/* Success Text */}
                     <div className="content-stretch flex flex-col gap-[4px] items-center relative shrink-0">
@@ -489,8 +498,17 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                               Resume
                             </p>
                             <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
-                              <div className="overflow-clip relative shrink-0 size-[20px]">
-                                <img alt="" className="block max-w-none size-full" src={imgCheckIcon} />
+                              <div className="overflow-clip relative shrink-0" style={{ width: '20px', height: '20px' }}>
+                                <img 
+                                  alt="" 
+                                  className="block max-w-none" 
+                                  src={imgCheckIcon} 
+                                  style={{ 
+                                    width: '20px', 
+                                    height: '20px',
+                                    filter: iconFilters.greenCheck
+                                  }} 
+                                />
                               </div>
                               <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
                                 Uploaded
@@ -553,7 +571,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
           <div className="content-stretch flex gap-[8px] items-start justify-end relative shrink-0 w-full">
             {currentStage > 1 && currentStage !== 3 && (
               <button
-                onClick={() => setCurrentStage((prev) => (prev - 1) as SetupStage)}
+                onClick={handleBack}
                 className="bg-v2-background-secondary border border-v2-border border-solid box-border content-stretch flex gap-[4px] items-center justify-center px-[16px] py-[12px] relative rounded-[8px] shrink-0 w-[120px] cursor-pointer transition-opacity duration-200 ease-out hover:opacity-90"
                 style={{ willChange: 'opacity' }}
               >

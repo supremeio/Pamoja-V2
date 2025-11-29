@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { colorValues } from '@/lib/colors/v2'
 
 // Icon assets from local icon library - using exact Figma icons
 const imgCheckedIcon = "/icons/v2/checked box icon.svg"

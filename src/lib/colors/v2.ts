@@ -146,3 +146,14 @@ export const colorValues = {
   // Overlay
   overlay: 'rgba(0, 0, 0, 0.8)',
 } as const
+
+// ============================================================================
+// ICON FILTERS (for converting white icons to specific colors)
+// ============================================================================
+// These CSS filters convert white (#ffffff) icons to specific colors
+// Used when icons need to be colored but the SVG itself is white
+
+export const iconFilters = {
+  // Green check icon filter - converts white to #008000
+  greenCheck: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%)',
+} as const

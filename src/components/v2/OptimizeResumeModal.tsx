@@ -32,7 +32,6 @@ export function OptimizeResumeModal({ isOpen, onClose, onSubmit }: OptimizeResum
 
   const [isMounted, setIsMounted] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
   
   // File upload states
   const [uploadState, setUploadState] = useState<FileUploadState>('default')
