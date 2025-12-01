@@ -540,16 +540,29 @@ export default function AIAgentPage() {
                         startIndex = Math.max(0, processes.length - 3)
                       }
                       
-                      // The loading process should be at position 48px (middle clear area) in the visible container
-                      // The loading process is at position `loadingIndex * itemSpacing` in the list (0px, 48px, 96px, etc.)
-                      // We want it to appear at 48px in the visible container
-                      // So: listTopOffset = 48px - (loadingIndex * itemSpacing)
+                      // Calculate offset to position the loading process at 48px (middle clear area)
+                      // The loading process should be at position 1 (middle) in the visible 3 items
+                      // The loading process is at position `loadingIndex - startIndex` in the visible slice
+                      // Position 0 = 0px, Position 1 = 48px, Position 2 = 96px
+                      // We want it at position 1 (48px)
+                      const loadingPositionInVisible = loadingIndex - startIndex
+                      
+                      // Calculate the offset needed to center the loading process
+                      // If loadingPositionInVisible = 0: loading is at 0px, we want it at 48px, so offset = 48px
+                      // If loadingPositionInVisible = 1: loading is at 48px, we want it at 48px, so offset = 0px
+                      // If loadingPositionInVisible = 2: loading is at 96px, we want it at 48px, so offset = -48px
+                      const offsetToCenter = (1 - loadingPositionInVisible) * itemSpacing
                       
                       // Account for completed cycles - each cycle moves us up by processes.length * itemSpacing
                       const cyclesOffset = cycleOffset * processes.length * itemSpacing
                       
-                      // Simple calculation: position the loading process at 48px
-                      listTopOffset = 48 - (loadingIndex * itemSpacing) - cyclesOffset
+                      // The first visible item is at `startIndex * itemSpacing` in the list
+                      // We want to position it so the loading process appears at 48px
+                      // Base offset: position the first visible item
+                      const baseOffset = 48 - (startIndex * itemSpacing) - cyclesOffset
+                      
+                      // Add adjustment to center the loading process
+                      listTopOffset = baseOffset + offsetToCenter
                     } else {
                       // No loading process - check if all completed
                       const allCompleted = processes.every(p => p.status === 'completed')
