@@ -345,6 +345,7 @@ export default function AIAgentPage() {
                             src={imgLoadingIcon}
                             style={{
                               animation: 'spin 3s linear infinite',
+                              transformOrigin: 'center center',
                               filter: isHoveringAgentButton
                                 ? 'brightness(0) invert(1)'
                                 : `brightness(0) saturate(100%) invert(67%) sepia(30%) saturate(1000%) hue-rotate(90deg) brightness(0.9)`,
@@ -631,6 +632,7 @@ export default function AIAgentPage() {
                                       src={imgLoadingIcon}
                                       style={{
                                         animation: isLoading ? 'spin 1s linear infinite' : 'none',
+                                        transformOrigin: 'center center',
                                         transition: 'opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)',
                                       }}
                                     />

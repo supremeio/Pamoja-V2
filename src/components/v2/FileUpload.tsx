@@ -254,10 +254,17 @@ export const FileUpload = React.memo(function FileUpload({
           style={{ ...containerStyle, ...(fullWidth ? {} : { width: '228px', height: '44px', minHeight: '44px' }) }}
         >
           <div className="basis-0 content-stretch flex gap-[4px] grow items-center min-h-px min-w-px relative shrink-0 overflow-hidden">
-            <div className="relative shrink-0 size-[20px] animate-spin">
-              <div className="absolute contents inset-0">
-                <img alt="" className="block max-w-none size-full" src={imgLoaderIcon} style={{ width: '16px', height: '16px' }} />
-              </div>
+            <div className="relative shrink-0 size-[20px] flex items-center justify-center">
+              <img 
+                alt="" 
+                className="block max-w-none animate-spin" 
+                src={imgLoaderIcon} 
+                style={{ 
+                  width: '16px', 
+                  height: '16px',
+                  transformOrigin: 'center center'
+                }} 
+              />
             </div>
             <p className="basis-0 grow leading-[20px] min-h-px min-w-px not-italic overflow-ellipsis overflow-hidden relative shrink-0 text-[14px] text-nowrap" style={{ ...fontMedium, color: textColor }}>
               {fileName || '[filename.pdf]'}

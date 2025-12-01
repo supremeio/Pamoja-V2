@@ -610,62 +610,55 @@ export default function ResultPage() {
                   }}
                 >
                   {/* Icon Container */}
-                  <div className="overflow-clip relative shrink-0 size-[20px]">
+                  <div className="overflow-clip relative shrink-0 size-[20px] flex items-center justify-center">
                     {saveJobState === 'default' && (
-                      <div className="absolute contents inset-0">
-                        <img
-                          alt=""
-                          className="block max-w-none size-full"
-                          src={imgSaveIcon}
-                          style={{ width: '16px', height: '16px' }}
-                        />
-                      </div>
+                      <img
+                        alt=""
+                        className="block max-w-none"
+                        src={imgSaveIcon}
+                        style={{ width: '16px', height: '16px' }}
+                      />
                     )}
                     {saveJobState === 'saving' && (
-                      <div className="absolute contents inset-0">
-                        <img
-                          alt=""
-                          className="block max-w-none size-full"
-                          src={imgLoaderIcon}
-                          style={{
-                            filter: 'brightness(0) saturate(100%) invert(1)',
-                            animation: 'spin 1s linear infinite',
-                            width: '16px',
-                            height: '16px',
-                          }}
-                        />
-                      </div>
+                      <img
+                        alt=""
+                        className="block max-w-none"
+                        src={imgLoaderIcon}
+                        style={{
+                          filter: 'brightness(0) saturate(100%) invert(1)',
+                          animation: 'spin 1s linear infinite',
+                          width: '16px',
+                          height: '16px',
+                          transformOrigin: 'center center',
+                        }}
+                      />
                     )}
                     {saveJobState === 'saved' && !isHoveringUnsave && (
-                      <div className="absolute contents inset-0">
-                        <img
-                          alt=""
-                          className="block max-w-none size-full"
-                          src={imgCheckIcon}
-                          style={{
-                            filter:
-                              'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%)',
-                            transition: 'opacity 300ms cubic-bezier(0.16, 1, 0.3, 1)',
-                            width: '16px',
-                            height: '16px',
-                          }}
-                        />
-                      </div>
+                      <img
+                        alt=""
+                        className="block max-w-none"
+                        src={imgCheckIcon}
+                        style={{
+                          filter:
+                            'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%)',
+                          transition: 'opacity 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+                          width: '16px',
+                          height: '16px',
+                        }}
+                      />
                     )}
                     {saveJobState === 'saved' && isHoveringUnsave && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="relative shrink-0 size-[20px]">
-                          <img
-                            alt=""
-                            className="block max-w-none size-full"
-                            src={imgMinusIcon}
-                            style={{
-                              filter: 'brightness(0) saturate(100%) invert(1)',
-                              transition: 'opacity 300ms cubic-bezier(0.16, 1, 0.3, 1)',
-                            }}
-                          />
-                        </div>
-                      </div>
+                      <img
+                        alt=""
+                        className="block max-w-none"
+                        src={imgMinusIcon}
+                        style={{
+                          filter: 'brightness(0) saturate(100%) invert(1)',
+                          transition: 'opacity 300ms cubic-bezier(0.16, 1, 0.3, 1)',
+                          width: '16px',
+                          height: '16px',
+                        }}
+                      />
                     )}
                   </div>
 

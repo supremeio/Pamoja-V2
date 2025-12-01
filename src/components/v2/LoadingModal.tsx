@@ -282,6 +282,7 @@ export function LoadingModal({
                               src={imgLoadingIcon}
                               style={{
                                 animation: isLoading ? 'spin 1s linear infinite' : 'none',
+                                transformOrigin: 'center center',
                                 transition: 'opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)'
                               }}
                             />
