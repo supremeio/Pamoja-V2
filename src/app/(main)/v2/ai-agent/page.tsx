@@ -169,8 +169,8 @@ export default function AIAgentPage() {
       })
     }
 
-    // Progress every 4 seconds - only create interval once when agent becomes active
-    processIntervalRef.current = setInterval(progressProcesses, 4000)
+    // Progress every 5 seconds - only create interval once when agent becomes active
+    processIntervalRef.current = setInterval(progressProcesses, 5000)
 
     return () => {
       if (processIntervalRef.current) {
