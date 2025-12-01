@@ -46,6 +46,8 @@ export default function AIAgentPage() {
   const cycleOffsetRef = useRef(0) // Ref to track cycle offset without triggering re-renders
   const totalProcessesCompletedRef = useRef(0) // Ref to track total processes without triggering re-renders
   const [isHoveringAgentButton, setIsHoveringAgentButton] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [showSuccessState, setShowSuccessState] = useState(false)
 
   const handleGetStarted = useCallback(() => {
     setIsSetupModalOpen(true)
@@ -70,115 +72,101 @@ export default function AIAgentPage() {
     setIsAgentPaused(prev => !prev)
   }, [])
 
-  // Auto-progress through processes for 3 cycles (21 processes total)
+  // Infinite loop process animation
   useEffect(() => {
     if (!isAgentActive || isAgentPaused) {
-      if (processIntervalRef.current) {
-        clearInterval(processIntervalRef.current)
-        processIntervalRef.current = undefined
-      }
       return
     }
 
-    const maxCycles = 3
-    const processCount = defaultProcesses.length
-    const maxProcesses = maxCycles * processCount // 3 cycles * 7 processes = 21
+    let timeoutId: NodeJS.Timeout
+    let isActive = true
 
-    const progressProcesses = () => {
+    const runStep = async () => {
+      // 1. Loading Phase (3.5s)
+      // The current process shows a spinner
+      await new Promise(resolve => {
+        timeoutId = setTimeout(resolve, 3500)
+      })
+      if (!isActive) return
+
+      // 2. Success Phase (1s)
+      // The spinner turns into a checkmark
+      setShowSuccessState(true)
+      await new Promise(resolve => {
+        timeoutId = setTimeout(resolve, 1000)
+      })
+      if (!isActive) return
+
+      // 3. Transition Phase (0.5s)
+      // The items slide up
+      setIsTransitioning(true)
+      await new Promise(resolve => {
+        timeoutId = setTimeout(resolve, 500)
+      })
+      if (!isActive) return
+
+      // 4. Update State & Reset
+      // Instantly swap content and reset positions
       setProcesses(prev => {
         const currentLoadingIndex = prev.findIndex(p => p.status === 'loading')
-        const allCompleted = prev.every(p => p.status === 'completed')
-
-        // Use refs to get current values without causing re-renders
-        const currentTotalCompleted = totalProcessesCompletedRef.current
-        const currentCycleOffset = cycleOffsetRef.current
-
-        // If we've completed 3 cycles (21 processes), stop
-        if (currentTotalCompleted >= maxProcesses) {
-          if (processIntervalRef.current) {
-            clearInterval(processIntervalRef.current)
-            processIntervalRef.current = undefined
-          }
-          return prev
+        
+        // Determine next index (looping)
+        let nextIndex = 0
+        if (currentLoadingIndex >= 0) {
+          nextIndex = (currentLoadingIndex + 1) % prev.length
         }
 
-        // If all processes are completed in current cycle
-        if (allCompleted) {
-          const newCycleOffset = currentCycleOffset + 1
-
-          // If we've completed 3 cycles, stop (don't start new cycle)
-          if (newCycleOffset >= maxCycles) {
-            if (processIntervalRef.current) {
-              clearInterval(processIntervalRef.current)
-              processIntervalRef.current = undefined
-            }
-            return prev
-          }
-
-          // Update cycle offset and total (all 7 processes in this cycle are completed)
-          cycleOffsetRef.current = newCycleOffset
-          const newTotalCompleted = newCycleOffset * prev.length
-          totalProcessesCompletedRef.current = newTotalCompleted
-          setCycleOffset(newCycleOffset)
-          setTotalProcessesCompleted(newTotalCompleted)
-
-          // Start next cycle
-          const reset: ProcessItem[] = prev.map((p, index) => ({
-            ...p,
-            status: (index === 0 ? 'loading' : 'pending') as ProcessItem['status'],
-          }))
-          return reset
+        // Update cycle count if wrapping around
+        if (nextIndex === 0) {
+          setCycleOffset(c => c + 1)
+          cycleOffsetRef.current += 1
         }
 
-        if (currentLoadingIndex < 0) {
-          // No loading process, start the first pending one
-          const firstPendingIndex = prev.findIndex(p => p.status === 'pending')
-          if (firstPendingIndex >= 0) {
-            const updated = [...prev]
-            updated[firstPendingIndex] = { ...updated[firstPendingIndex], status: 'loading' }
-            return updated
-          }
-          return prev
-        }
-
-        // Mark current loading as completed and start next pending
         const updated = [...prev]
-        updated[currentLoadingIndex] = { ...updated[currentLoadingIndex], status: 'completed' }
-
-        // Calculate new total before updating state
-        const newTotalCompleted = currentTotalCompleted + 1
-        totalProcessesCompletedRef.current = newTotalCompleted
-
-        // Stop if we've reached max processes
-        if (newTotalCompleted >= maxProcesses) {
-          if (processIntervalRef.current) {
-            clearInterval(processIntervalRef.current)
-            processIntervalRef.current = undefined
-          }
-        } else {
-          // Update total processes completed
-          setTotalProcessesCompleted(newTotalCompleted)
+        
+        // Mark current as completed
+        if (currentLoadingIndex >= 0) {
+          updated[currentLoadingIndex] = { ...updated[currentLoadingIndex], status: 'completed' }
         }
-
-        const nextPendingIndex = updated.findIndex(p => p.status === 'pending')
-        if (nextPendingIndex >= 0) {
-          updated[nextPendingIndex] = { ...updated[nextPendingIndex], status: 'loading' }
-        }
+        
+        // Mark next as loading
+        updated[nextIndex] = { ...updated[nextIndex], status: 'loading' }
+        
+        // If we just looped, reset previous completed items to pending so they can be "processed" again visually if needed,
+        // or just keep them completed?
+        // Request: "make the overall process a loop".
+        // If we loop, the "completed" items from the previous cycle need to eventually reset to "pending" 
+        // OR we just treat them as new pending items when they re-enter the window.
+        // Simpler: When setting index X to loading, ensure it's "fresh".
+        
+        // To support infinite visual looping, we should probably reset the *next* item to 'pending' 
+        // just before we process it? Or reset the whole list?
+        // Let's Reset the status of the *next* item to 'pending' before making it 'loading' 
+        // is redundant.
+        // Actually, if we loop, we want the items to look "pending" before they slide in.
+        // Let's reset the specific item we are about to process.
+        // AND reset the item *after* it (so it looks pending in the "next" slot).
+        
+        const nextNextIndex = (nextIndex + 1) % prev.length
+        updated[nextNextIndex] = { ...updated[nextNextIndex], status: 'pending' }
 
         return updated
       })
+
+      setIsTransitioning(false)
+      setShowSuccessState(false)
+
+      // Loop again
+      runStep()
     }
 
-    // Progress every 5 seconds - only create interval once when agent becomes active
-    processIntervalRef.current = setInterval(progressProcesses, 5000)
+    runStep()
 
     return () => {
-      if (processIntervalRef.current) {
-        clearInterval(processIntervalRef.current)
-        processIntervalRef.current = undefined
-      }
+      isActive = false
+      clearTimeout(timeoutId)
     }
-  }, [isAgentActive, isAgentPaused]) // Only depend on active/paused state, not on cycleOffset or totalProcessesCompleted
+  }, [isAgentActive, isAgentPaused])
   return (
     <div
       className="bg-v2-background-primary content-stretch flex flex-col gap-[40px] items-center relative w-full min-h-screen"
@@ -576,22 +564,36 @@ export default function AIAgentPage() {
                           {visibleItems.map(({ item, top }, index) => {
                             if (!item) return null
                             
+                            // Determine state for this specific item instance
+                            const isMiddleItem = index === 1 // Middle slot
                             const isCompleted = item.status === 'completed'
-                            const isLoading = item.status === 'loading'
                             
+                            // Special logic for the middle item (currently active process)
+                            // If in success state, force it to look completed (check icon)
+                            // Otherwise, if it's loading, it shows the spinner
+                            // If transitioning, we maintain the state until the snap
+                            
+                            // During transition, we shift everything up by 48px
+                            const translateY = isTransitioning ? -48 : 0
+                            const transitionStyle = isTransitioning 
+                              ? 'transform 500ms cubic-bezier(0.4, 0, 0.2, 1)' 
+                              : 'none' // Instant reset when not transitioning
+
                             return (
                               <div
                                 key={`${item.id}-${index}`}
-                                className="absolute flex gap-[4px] items-center w-full transition-all duration-300 ease-in-out"
+                                className="absolute flex gap-[4px] items-center w-full"
                                 style={{
                                   top: `${top}px`,
                                   left: 0,
-                                  height: '24px'
+                                  height: '24px',
+                                  transform: `translateY(${translateY}px)`,
+                                  transition: transitionStyle,
                                 }}
                               >
                                 <div className="overflow-clip relative shrink-0 size-[16px]">
-                                  {isCompleted ? (
-                                    // Completed: Show check icon (16px, green #008000)
+                                  {isCompleted || (isMiddleItem && showSuccessState) ? (
+                                    // Completed or Success Phase: Show check icon (16px, green #008000)
                                     <img
                                       alt=""
                                       className="block max-w-none size-full"
@@ -607,7 +609,7 @@ export default function AIAgentPage() {
                                       className="block max-w-none size-full"
                                       src={imgLoadingIcon}
                                       style={{
-                                        animation: isLoading ? 'spin 1s linear infinite' : 'none',
+                                        animation: item.status === 'loading' ? 'spin 1s linear infinite' : 'none',
                                         transformOrigin: 'center center',
                                         transition: 'opacity 300ms cubic-bezier(0.4, 0, 0.2, 1)',
                                       }}
