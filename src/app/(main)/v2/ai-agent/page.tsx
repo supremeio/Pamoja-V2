@@ -548,13 +548,18 @@ export default function AIAgentPage() {
                       const loadingPositionInVisible = loadingIndex - startIndex
                       const offsetToCenter = (1 - loadingPositionInVisible) * itemSpacing
                       
-                      // Also account for completed cycles and processes
-                      // Each completed process moves the list up by 48px
-                      const completedInCurrentCycle = processes.filter(p => p.status === 'completed').length
-                      const totalCompleted = cycleOffset * processes.length + completedInCurrentCycle
+                      // Calculate offset to position the loading process correctly
+                      // The loading process is at position `loadingIndex * 48px` in the full list
+                      // We want it at 48px in the visible container
+                      // So: listTopOffset = 48px - (loadingIndex * 48px) + offsetToCenter
+                      // But we also need to account for completed cycles
+                      const cyclesOffset = cycleOffset * processes.length * itemSpacing
                       
-                      // Total offset: move up by completed processes, then adjust to center loading
-                      listTopOffset = -totalCompleted * itemSpacing + offsetToCenter
+                      // The loading process position in the list: loadingIndex * itemSpacing
+                      // We want it at 48px, so: listTopOffset = 48px - loadingIndex * itemSpacing
+                      // But we also need to account for completed cycles
+                      // And adjust for centering in visible slice
+                      listTopOffset = 48 - (loadingIndex * itemSpacing) - cyclesOffset + offsetToCenter
                     } else {
                       // No loading process - check if all completed
                       const allCompleted = processes.every(p => p.status === 'completed')
