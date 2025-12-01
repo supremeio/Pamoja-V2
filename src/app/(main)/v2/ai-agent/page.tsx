@@ -70,27 +70,6 @@ export default function AIAgentPage() {
     setIsAgentPaused(prev => !prev)
   }, [])
 
-  // Initialize first process when agent becomes active
-  useEffect(() => {
-    if (isAgentActive && !isAgentPaused) {
-      setProcesses(prev => {
-        const hasLoading = prev.some(p => p.status === 'loading')
-        const hasCompleted = prev.some(p => p.status === 'completed')
-
-        // Only initialize if no process is loading or completed yet (fresh start)
-        if (!hasLoading && !hasCompleted) {
-          return prev.map(
-            (p, index): ProcessItem => ({
-              ...p,
-              status: (index === 0 ? 'loading' : 'pending') as ProcessItem['status'],
-            })
-          )
-        }
-        return prev
-      })
-    }
-  }, [isAgentActive, isAgentPaused])
-
   // Auto-progress through processes for 3 cycles (21 processes total)
   useEffect(() => {
     if (!isAgentActive || isAgentPaused) {
@@ -544,39 +523,55 @@ export default function AIAgentPage() {
                     const loadingIndex = processes.findIndex(p => p.status === 'loading')
                     const itemSpacing = 48 // Spacing from one item top to next item top (positions: 0px, 48px, 96px)
 
-                    // Calculate total offset: total processes completed across all cycles
-                    // This moves the list up inside the fixed frame
-                    // Use cycleOffset * processes.length for completed cycles + current cycle completed count
-                    const completedCount = processes.filter(p => p.status === 'completed').length
-                    const totalOffset =
-                      (cycleOffset * processes.length + completedCount) * itemSpacing
-
-                    // Get the 3 items to display: show completed (above in top shadow), loading (middle clear), pending (below in bottom shadow)
-                    // Special case: At the end of loop, last process should be in middle, second-to-last at top
+                    // Calculate which processes to show and the offset
+                    // The loading process should always be at position 48px (middle clear area)
+                    // We need to show: [completed before] [loading] [pending after]
+                    
                     let startIndex = 0
-                    if (loadingIndex >= 0) {
-                      // If loading the last process (index = processes.length - 1)
-                      if (loadingIndex === processes.length - 1) {
-                        // Show: [second-to-last] [last (loading)] [first of next cycle or empty]
-                        startIndex = processes.length - 2
-                      } else {
-                        // Normal case: Show one before loading, loading, one after
-                        startIndex = Math.max(0, loadingIndex - 1)
-                      }
+                    let listTopOffset = 0
 
+                    if (loadingIndex >= 0) {
+                      // We have a loading process - center it at position 48px
+                      // Show one before (if exists), loading, one after (if exists)
+                      startIndex = Math.max(0, loadingIndex - 1)
+                      
                       // Ensure we have 3 items to show
                       if (startIndex + 3 > processes.length) {
                         startIndex = Math.max(0, processes.length - 3)
                       }
+                      
+                      // The loading process should be at position 1 (middle = 48px) in the visible 3 items
+                      // The loading process is at position `loadingIndex - startIndex` in the visible slice
+                      // Position 0 = 0px, Position 1 = 48px, Position 2 = 96px
+                      // We want it at position 1 (48px), so we need to offset by:
+                      // offset = (1 - (loadingIndex - startIndex)) * 48px
+                      const loadingPositionInVisible = loadingIndex - startIndex
+                      const offsetToCenter = (1 - loadingPositionInVisible) * itemSpacing
+                      
+                      // Also account for completed cycles and processes
+                      // Each completed process moves the list up by 48px
+                      const completedInCurrentCycle = processes.filter(p => p.status === 'completed').length
+                      const totalCompleted = cycleOffset * processes.length + completedInCurrentCycle
+                      
+                      // Total offset: move up by completed processes, then adjust to center loading
+                      listTopOffset = -totalCompleted * itemSpacing + offsetToCenter
                     } else {
-                      // All completed - show last 2 processes with last in middle
+                      // No loading process - check if all completed
                       const allCompleted = processes.every(p => p.status === 'completed')
                       if (allCompleted) {
-                        // Show: [second-to-last] [last] [first of next cycle]
+                        // Show last 2 processes with last in middle
                         startIndex = processes.length - 2
+                        // All processes in current cycle are completed
+                        const totalCompleted = (cycleOffset + 1) * processes.length
+                        // Center the last process at 48px
+                        const lastProcessIndex = processes.length - 1
+                        const lastPositionInVisible = lastProcessIndex - startIndex
+                        const offsetToCenter = (1 - lastPositionInVisible) * itemSpacing
+                        listTopOffset = -totalCompleted * itemSpacing + offsetToCenter
                       } else {
-                        // No loading item (shouldn't happen when active, but handle gracefully)
-                        startIndex = Math.max(0, processes.length - 3)
+                        // No loading and not all completed - shouldn't happen when active
+                        startIndex = 0
+                        listTopOffset = 0
                       }
                     }
 
@@ -591,19 +586,6 @@ export default function AIAgentPage() {
                         id: `${nextCycleFirst.id}-next-cycle`,
                       })
                     }
-
-                    // Position the list inside the fixed frame
-                    // Container: 120px total
-                    // - Top shadow: 0-40px
-                    // - Middle clear: 40-80px
-                    // - Bottom shadow: 80-120px
-                    // Process positions: 0px, 48px, 96px (from top of container)
-                    // Fixed positions: [0px, 48px, 96px] from top of container
-                    // The list starts at 0px so items are naturally at: 0px, 48px, 96px
-                    // As processes complete, move the list up by 48px each time
-                    // This creates smooth sliding animation while maintaining fixed positions
-                    const baseOffset = 0 // List starts at 0px for fixed positions
-                    const listTopOffset = baseOffset - totalOffset
 
                     return (
                       <>
