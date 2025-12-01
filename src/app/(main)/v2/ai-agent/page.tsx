@@ -43,6 +43,8 @@ export default function AIAgentPage() {
   const [cycleOffset, setCycleOffset] = useState(0) // Track how many cycles we've completed
   const [totalProcessesCompleted, setTotalProcessesCompleted] = useState(0) // Track total processes completed across all cycles
   const processIntervalRef = useRef<NodeJS.Timeout>()
+  const cycleOffsetRef = useRef(0) // Ref to track cycle offset without triggering re-renders
+  const totalProcessesCompletedRef = useRef(0) // Ref to track total processes without triggering re-renders
   const [isHoveringAgentButton, setIsHoveringAgentButton] = useState(false)
 
   const handleGetStarted = useCallback(() => {
@@ -60,6 +62,8 @@ export default function AIAgentPage() {
     setProcesses(initialProcesses)
     setCycleOffset(0)
     setTotalProcessesCompleted(0)
+    cycleOffsetRef.current = 0
+    totalProcessesCompletedRef.current = 0
   }, [])
 
   const handlePauseResume = useCallback(() => {
@@ -92,41 +96,51 @@ export default function AIAgentPage() {
     if (!isAgentActive || isAgentPaused) {
       if (processIntervalRef.current) {
         clearInterval(processIntervalRef.current)
+        processIntervalRef.current = undefined
       }
       return
     }
 
     const maxCycles = 3
-    const maxProcesses = maxCycles * processes.length // 3 cycles * 7 processes = 21
+    const processCount = defaultProcesses.length
+    const maxProcesses = maxCycles * processCount // 3 cycles * 7 processes = 21
 
     const progressProcesses = () => {
       setProcesses(prev => {
         const currentLoadingIndex = prev.findIndex(p => p.status === 'loading')
         const allCompleted = prev.every(p => p.status === 'completed')
 
+        // Use refs to get current values without causing re-renders
+        const currentTotalCompleted = totalProcessesCompletedRef.current
+        const currentCycleOffset = cycleOffsetRef.current
+
         // If we've completed 3 cycles (21 processes), stop
-        if (totalProcessesCompleted >= maxProcesses) {
+        if (currentTotalCompleted >= maxProcesses) {
           if (processIntervalRef.current) {
             clearInterval(processIntervalRef.current)
+            processIntervalRef.current = undefined
           }
           return prev
         }
 
         // If all processes are completed in current cycle
         if (allCompleted) {
-          const newCycleOffset = cycleOffset + 1
+          const newCycleOffset = currentCycleOffset + 1
 
           // If we've completed 3 cycles, stop (don't start new cycle)
           if (newCycleOffset >= maxCycles) {
             if (processIntervalRef.current) {
               clearInterval(processIntervalRef.current)
+              processIntervalRef.current = undefined
             }
             return prev
           }
 
           // Update cycle offset and total (all 7 processes in this cycle are completed)
-          setCycleOffset(newCycleOffset)
+          cycleOffsetRef.current = newCycleOffset
           const newTotalCompleted = newCycleOffset * prev.length
+          totalProcessesCompletedRef.current = newTotalCompleted
+          setCycleOffset(newCycleOffset)
           setTotalProcessesCompleted(newTotalCompleted)
 
           // Start next cycle
@@ -153,12 +167,14 @@ export default function AIAgentPage() {
         updated[currentLoadingIndex] = { ...updated[currentLoadingIndex], status: 'completed' }
 
         // Calculate new total before updating state
-        const newTotalCompleted = totalProcessesCompleted + 1
+        const newTotalCompleted = currentTotalCompleted + 1
+        totalProcessesCompletedRef.current = newTotalCompleted
 
         // Stop if we've reached max processes
         if (newTotalCompleted >= maxProcesses) {
           if (processIntervalRef.current) {
             clearInterval(processIntervalRef.current)
+            processIntervalRef.current = undefined
           }
         } else {
           // Update total processes completed
@@ -174,15 +190,16 @@ export default function AIAgentPage() {
       })
     }
 
-    // Progress every 4 seconds
+    // Progress every 4 seconds - only create interval once when agent becomes active
     processIntervalRef.current = setInterval(progressProcesses, 4000)
 
     return () => {
       if (processIntervalRef.current) {
         clearInterval(processIntervalRef.current)
+        processIntervalRef.current = undefined
       }
     }
-  }, [isAgentActive, isAgentPaused, cycleOffset, totalProcessesCompleted, processes.length])
+  }, [isAgentActive, isAgentPaused]) // Only depend on active/paused state, not on cycleOffset or totalProcessesCompleted
   return (
     <div
       className="bg-v2-background-primary content-stretch flex flex-col gap-[40px] items-center relative w-full min-h-screen"
