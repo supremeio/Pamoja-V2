@@ -41,10 +41,7 @@ export default function AIAgentPage() {
   const [isAgentPaused, setIsAgentPaused] = useState(false)
   const [processes, setProcesses] = useState<ProcessItem[]>(defaultProcesses)
   const [cycleOffset, setCycleOffset] = useState(0) // Track how many cycles we've completed
-  const [totalProcessesCompleted, setTotalProcessesCompleted] = useState(0) // Track total processes completed across all cycles
-  const processIntervalRef = useRef<NodeJS.Timeout>()
   const cycleOffsetRef = useRef(0) // Ref to track cycle offset without triggering re-renders
-  const totalProcessesCompletedRef = useRef(0) // Ref to track total processes without triggering re-renders
   const [isHoveringAgentButton, setIsHoveringAgentButton] = useState(false)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const [showSuccessState, setShowSuccessState] = useState(false)
@@ -63,9 +60,7 @@ export default function AIAgentPage() {
     }))
     setProcesses(initialProcesses)
     setCycleOffset(0)
-    setTotalProcessesCompleted(0)
     cycleOffsetRef.current = 0
-    totalProcessesCompletedRef.current = 0
   }, [])
 
   const handlePauseResume = useCallback(() => {
