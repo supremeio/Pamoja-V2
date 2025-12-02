@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { InputProps as ShadcnInputProps } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { createTransition } from '@/lib/transitions/v2'
 
 const fontMedium = typography.medium
@@ -447,27 +447,27 @@ export function TextField({
 
   // Determine border color based on state
   const getBorderColor = () => {
-    if (error) return colorValues.text.error
-    if (isFocused) return colorValues.border.active
-    return colorValues.border.default
+    if (error) return colors.text.error
+    if (isFocused) return colors.border.active
+    return colors.border.default
   }
 
   // Determine background color
   const getBackgroundColor = () => {
-    if (readOnly || disabled) return colorValues.background.secondary
-    return colorValues.background.primary
+    if (readOnly || disabled) return colors.background.secondary
+    return colors.background.primary
   }
 
   // Determine placeholder/text color and opacity
   const getTextColor = () => {
-    if (hasValue) return colorValues.text.primary
+    if (hasValue) return colors.text.primary
     if (isFocused && !hasValue) {
-      return colorValues.text.muted // placeholder when focused
+      return colors.text.muted // placeholder when focused
     }
     if (isHovered && !hasValue) {
-      return colorValues.text.primary // placeholder when hovered
+      return colors.text.primary // placeholder when hovered
     }
-    return colorValues.text.muted // default placeholder
+    return colors.text.muted // default placeholder
   }
 
   const getTextOpacity = () => {
@@ -540,9 +540,9 @@ export function TextField({
                   )}
                 style={{
                   ...fontMedium,
-                    color: hasValue ? colorValues.text.primary : getTextColor(),
+                    color: hasValue ? colors.text.primary : getTextColor(),
                     opacity: hasValue ? 1 : getTextOpacity(),
-                    caretColor: isTyping && hasValue ? colorValues.text.caret : colorValues.text.primary,
+                    caretColor: isTyping && hasValue ? colors.text.caret : colors.text.primary,
                     transition: createTransition(['color', 'opacity']),
                     minHeight: `${lineHeight}px`,
                     maxHeight: `${maxHeight}px`,
@@ -640,9 +640,9 @@ export function TextField({
                 )}
               style={{
                 ...fontMedium,
-                  color: hasValue ? colorValues.text.primary : getTextColor(),
+                  color: hasValue ? colors.text.primary : getTextColor(),
                   opacity: hasValue ? 1 : getTextOpacity(),
-                  caretColor: isTyping && hasValue ? colorValues.text.caret : colorValues.text.primary,
+                  caretColor: isTyping && hasValue ? colors.text.caret : colors.text.primary,
                   transition: createTransition(['color', 'opacity'])
                 }}
                 autoComplete="off"

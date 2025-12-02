@@ -4,6 +4,7 @@ import React, { useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { typography } from '@/lib/typography/v2'
+import { colors } from '@/lib/colors/v2'
 import { Separator } from './Separator'
 
 const fontMedium = typography.medium
@@ -15,8 +16,13 @@ const img1 = "/icons/v2/applications-menu-icon.svg" // Applications icon
 const img2 = "/icons/v2/documents-icon.svg" // Toolkit icon
 const img3 = "/icons/v2/email-icon.svg" // Contact us/email icon
 
-const activeFilter = 'brightness(0) saturate(100%) invert(100%)'
-const inactiveFilter = 'brightness(0) saturate(100%) invert(54%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
+const activeFilter = 'var(--v2-icon-filter-primary)'
+const inactiveFilter = 'var(--v2-icon-filter-muted)'
+
+// In light mode, active icons should be dark (primary color) or brand color
+// We need a way to handle this dynamic filtering.
+// For now, let's rely on CSS variables for colors where possible, 
+// but for images we might need a different approach or CSS classes.
 
 /**
  * Props for SideNavigation component

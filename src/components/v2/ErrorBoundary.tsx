@@ -2,7 +2,7 @@
 
 import React, { Component, ErrorInfo, ReactNode } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 
 const fontMedium = typography.medium
 const fontSemibold = typography.semibold
@@ -70,15 +70,15 @@ export class ErrorBoundary extends Component<Props, State> {
         <div
           className="flex flex-col items-center justify-center min-h-screen p-8"
           style={{
-            backgroundColor: colorValues.background.primary,
-            color: colorValues.text.primary
+            backgroundColor: colors.background.primary,
+            color: colors.text.primary
           }}
         >
           <div
             className="flex flex-col gap-4 items-center max-w-md w-full p-8 rounded-lg"
             style={{
-              backgroundColor: colorValues.background.secondary,
-              border: `1px solid ${colorValues.border.default}`
+              backgroundColor: colors.background.secondary,
+              border: `1px solid ${colors.border.default}`
             }}
           >
             <h2
@@ -91,7 +91,7 @@ export class ErrorBoundary extends Component<Props, State> {
               className="text-sm text-center"
               style={{
                 ...fontMedium,
-                color: colorValues.text.secondary
+                color: colors.text.secondary
               }}
             >
               {this.state.error?.message || 'An unexpected error occurred'}
@@ -101,8 +101,8 @@ export class ErrorBoundary extends Component<Props, State> {
               className="px-4 py-2 rounded transition-colors"
               style={{
                 ...fontMedium,
-                backgroundColor: colorValues.brand.primary,
-                color: colorValues.text.primary
+                backgroundColor: colors.brand.primary,
+                color: colors.text.primary
               }}
             >
               Try again
@@ -115,5 +115,6 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children
   }
 }
+
 
 

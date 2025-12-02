@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef, useCallback, useMemo } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { spacing } from '@/lib/spacing/v2'
 import { sizes } from '@/lib/sizing/v2'
 import { createTransition } from '@/lib/transitions/v2'
@@ -144,7 +144,7 @@ export function LoadingModal({
 
   // All hooks must be called before any conditional returns
   const overlayStyle = useMemo<React.CSSProperties>(() => ({
-    backgroundColor: colorValues.overlay,
+    backgroundColor: colors.overlay,
     opacity: isAnimating ? 1 : 0,
     transition: isMounted ? createTransition(['opacity']) : 'none',
     pointerEvents: (isAnimating ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],

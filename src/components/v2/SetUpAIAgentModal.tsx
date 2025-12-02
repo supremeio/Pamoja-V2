@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues, iconFilters } from '@/lib/colors/v2'
+import { colors, iconFilters } from '@/lib/colors/v2'
 import { createTransition } from '@/lib/transitions/v2'
 import { FileUpload, FileUploadState } from './FileUpload'
 import { Separator } from './Separator'
@@ -247,7 +247,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
   }, [currentStage])
 
   const overlayStyle: React.CSSProperties = {
-    backgroundColor: colorValues.overlay,
+    backgroundColor: colors.overlay,
     opacity: isAnimating ? 1 : 0,
     transition: isMounted ? createTransition(['opacity'], 'slow') : 'none',
     pointerEvents: (isAnimating ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],
@@ -328,9 +328,9 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                         ? currentStage === 3
                           ? '#123520'
                           : currentStage === 1
-                            ? colorValues.success.primary
+                            ? colors.success.primary
                             : '#123520'
-                        : colorValues.background.secondary,
+                        : colors.background.secondary,
                   }}
                 />
                 <div
@@ -340,8 +340,8 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                       currentStage >= 2
                         ? currentStage === 3
                           ? '#123520'
-                          : colorValues.success.primary
-                        : colorValues.background.secondary,
+                          : colors.success.primary
+                        : colors.background.secondary,
                   }}
                 />
                 <div
@@ -349,8 +349,8 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                   style={{
                     backgroundColor:
                       currentStage >= 3
-                        ? colorValues.success.primary
-                        : colorValues.background.secondary,
+                        ? colors.success.primary
+                        : colors.background.secondary,
                   }}
                 />
               </div>
@@ -550,7 +550,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                       {/* Header */}
                       <p
                         className="leading-[1.7] not-italic relative shrink-0 text-[14px] text-nowrap uppercase whitespace-pre"
-                        style={{ ...fontMedium, color: colorValues.status.offer.text }}
+                        style={{ ...fontMedium, color: colors.status.offer.text }}
                       >
                         Setup Summary
                       </p>
@@ -561,7 +561,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                         {uploadedFileName && (
                           <div 
                             className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
-                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
+                            style={{ borderBottomColor: colors.border.default, borderBottomWidth: '1px' }}
                           >
                             <p
                               className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
@@ -599,7 +599,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                         {preferences.jobRole && (
                           <div 
                             className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
-                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
+                            style={{ borderBottomColor: colors.border.default, borderBottomWidth: '1px' }}
                           >
                             <p
                               className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
@@ -622,7 +622,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                         {(preferences.location || preferences.workTypes.length > 0) && (
                           <div 
                             className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
-                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
+                            style={{ borderBottomColor: colors.border.default, borderBottomWidth: '1px' }}
                           >
                             <p
                               className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
@@ -654,7 +654,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                         {preferences.salaryRange && (
                           <div 
                             className="border-b border-solid box-border content-stretch flex items-center justify-between px-0 py-[12px] relative shrink-0 w-full"
-                            style={{ borderBottomColor: colorValues.border.default, borderBottomWidth: '1px' }}
+                            style={{ borderBottomColor: colors.border.default, borderBottomWidth: '1px' }}
                           >
                             <p
                               className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-secondary text-nowrap whitespace-pre"
@@ -684,7 +684,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                           <div className="content-stretch flex gap-[4px] items-center relative shrink-0">
                             <p
                               className="leading-[20px] not-italic relative shrink-0 text-[14px] text-nowrap whitespace-pre"
-                              style={{ ...fontMedium, color: colorValues.success.primary }}
+                              style={{ ...fontMedium, color: colors.success.primary }}
                             >
                               500 credits
                             </p>

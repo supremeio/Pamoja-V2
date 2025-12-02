@@ -46,8 +46,16 @@
   --v2-text-muted: #898989;
   --v2-text-accent: #7296ac;
   --v2-text-button: #8aa8ba;
+  --v2-text-caret: #b6d8ff;
+  --v2-text-error: #d37e76;
+  --v2-text-info: #8aa8ba;
+  --v2-border-active: #ffffff;
+  --v2-border-error: #592b26;
   --v2-brand-primary: #145075;
   --v2-status-error: #B04B41;
+  --v2-success-primary: #48ba77;
+  --v2-destructive-primary: #d73e3d;
+  --v2-overlay: rgba(0, 0, 0, 0.8);
   
   /* V2 Toast Colors */
   --v2-toast-success: #386f4e;
@@ -80,6 +88,12 @@
   --v2-status-accepted-bg: #123520;
   --v2-status-accepted-border: #386f4e;
   --v2-status-accepted-text: #48ba77;
+
+  /* Icon Filters - Default (Dark Mode) */
+  /* Primary Icon: White */
+  --v2-icon-filter-primary: brightness(0) saturate(100%) invert(100%);
+  /* Muted Icon: #898989 */
+  --v2-icon-filter-muted: brightness(0) saturate(100%) invert(54%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 /* Theme variables */

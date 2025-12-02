@@ -3,7 +3,7 @@
 import { useCallback, useMemo } from 'react'
 import { Separator } from './Separator'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 
 const fontMedium = typography.medium
 
@@ -13,7 +13,7 @@ const imgOptimizeIcon = "/icons/v2/optimize-icon.svg" // Compose reminder email 
 const imgDeleteIcon = "/icons/v2/delete-icon.svg" // Delete icon
 
 // Icon filter for inactive state (matches SideNavigation inactiveFilter)
-const inactiveFilter = 'brightness(0) saturate(100%) invert(54%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%)'
+const inactiveFilter = 'var(--v2-icon-filter-muted)'
 
 interface ApplicationActionsMenuProps {
   isOpen: boolean
@@ -157,7 +157,7 @@ export function ApplicationActionsMenu({
                   }}
                 />
               </div>
-              <p className="leading-[1.7] not-italic relative shrink-0 group-hover:text-v2-text-primary text-[14px] text-nowrap whitespace-pre transition-colors duration-200 ease-out" style={{ ...fontMedium, color: colorValues.text.error }}>
+              <p className="leading-[1.7] not-italic relative shrink-0 group-hover:text-v2-text-primary text-[14px] text-nowrap whitespace-pre transition-colors duration-200 ease-out" style={{ ...fontMedium, color: colors.text.error }}>
                 Delete application
               </p>
             </div>

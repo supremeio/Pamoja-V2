@@ -17,6 +17,7 @@ export const colors = {
   background: {
     primary: 'var(--v2-background-primary)',
     secondary: 'var(--v2-background-secondary)',
+    card: 'var(--v2-background-secondary)', // Card uses secondary background
   },
   // Text colors
   text: {
@@ -25,11 +26,16 @@ export const colors = {
     muted: 'var(--v2-text-muted)',
     accent: 'var(--v2-text-accent)',
     button: 'var(--v2-text-button)',
+    caret: 'var(--v2-text-caret)',
+    error: 'var(--v2-text-error)',
+    info: 'var(--v2-text-info)',
   },
   // Border colors
   border: {
     default: 'var(--v2-border-default)',
     light: 'var(--v2-border-light)',
+    active: 'var(--v2-border-active)',
+    error: 'var(--v2-border-error)',
   },
   // Brand colors
   brand: {
@@ -70,6 +76,21 @@ export const colors = {
     error: 'var(--v2-toast-error)',
     info: 'var(--v2-toast-info)',
     warning: 'var(--v2-toast-warning)',
+  },
+  // Success/Progress colors
+  success: {
+    primary: 'var(--v2-success-primary)',
+  },
+  // Destructive/Action colors
+  destructive: {
+    primary: 'var(--v2-destructive-primary)',
+  },
+  // Overlay
+  overlay: 'var(--v2-overlay)',
+  // Icon filters
+  iconFilters: {
+    primary: 'var(--v2-icon-filter-primary)',
+    muted: 'var(--v2-icon-filter-muted)',
   },
 } as const
 

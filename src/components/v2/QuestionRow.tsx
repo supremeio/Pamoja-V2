@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useMemo, useRef, useEffect } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { spacing } from '@/lib/spacing/v2'
 import { sizes } from '@/lib/sizing/v2'
 import { createTransition } from '@/lib/transitions/v2'
@@ -206,26 +206,26 @@ export const QuestionRow = React.memo(function QuestionRow({
 
   const hasEditText = editValue.length > 0
   const textareaContainerStyle = useMemo(() => ({
-    backgroundColor: colorValues.background.primary,
-    borderColor: isTextareaFocused || (isTextareaTyping && hasEditText) ? colorValues.border.active : colorValues.border.default,
+    backgroundColor: colors.background.primary,
+    borderColor: isTextareaFocused || (isTextareaTyping && hasEditText) ? colors.border.active : colors.border.default,
     borderWidth: sizes.height.border,
     borderStyle: 'solid',
     transition: createTransition(['border-color', 'background-color'])
   }), [isTextareaFocused, isTextareaTyping, hasEditText])
 
   const textareaStyle = useMemo(() => {
-    let textColor: string = colorValues.text.secondary
+    let textColor: string = colors.text.secondary
     let textOpacity = 1
     
     if (!hasEditText) {
       if (isTextareaFocused) {
-        textColor = colorValues.text.muted
+        textColor = colors.text.muted
         textOpacity = 0.3
       } else if (isTextareaHovered) {
-        textColor = colorValues.text.primary
+        textColor = colors.text.primary
         textOpacity = 0.5
       } else {
-        textColor = colorValues.text.muted
+        textColor = colors.text.muted
         textOpacity = 0.3
       }
     }
@@ -234,7 +234,7 @@ export const QuestionRow = React.memo(function QuestionRow({
       ...fontMedium,
       color: textColor,
       opacity: textOpacity,
-      caretColor: isTextareaTyping && hasEditText ? colorValues.text.caret : colorValues.text.primary,
+      caretColor: isTextareaTyping && hasEditText ? colors.text.caret : colors.text.primary,
       transition: createTransition(['color', 'opacity'])
     }
   }, [hasEditText, isTextareaFocused, isTextareaHovered, isTextareaTyping])
@@ -244,7 +244,7 @@ export const QuestionRow = React.memo(function QuestionRow({
       <div
         className="box-border content-stretch flex flex-col items-start justify-center relative shrink-0 w-full group"
         style={{
-          backgroundColor: colorValues.background.card,
+          backgroundColor: colors.background.card,
           padding: spacing.lg,
           borderRadius: sizes.borderRadius.md,
           ...rowStyle,

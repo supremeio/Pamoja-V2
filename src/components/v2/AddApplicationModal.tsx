@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { TextField } from './TextField'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { createTransition } from '@/lib/transitions/v2'
 
 const fontMedium = typography.medium
@@ -72,7 +72,7 @@ export function AddApplicationModal({ isOpen, onClose, onSubmit }: AddApplicatio
   const isFormValid = formData.company && formData.role && formData.dateApplied && formData.status
 
   const overlayStyle: React.CSSProperties = {
-    backgroundColor: colorValues.overlay,
+    backgroundColor: colors.overlay,
     opacity: isAnimating ? 1 : 0,
     transition: isMounted ? createTransition(['opacity'], 'slow') : 'none',
     pointerEvents: (isAnimating ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],

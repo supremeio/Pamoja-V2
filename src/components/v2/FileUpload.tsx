@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useCallback, useMemo, useEffect } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { spacing } from '@/lib/spacing/v2'
 import { sizes } from '@/lib/sizing/v2'
 import { createTransition } from '@/lib/transitions/v2'
@@ -164,7 +164,7 @@ export const FileUpload = React.memo(function FileUpload({
 
   const containerStyle = useMemo(() => {
     const baseStyle = {
-      backgroundColor: colorValues.background.primary,
+      backgroundColor: colors.background.primary,
       borderWidth: sizes.height.border,
       borderStyle: 'solid',
       borderRadius: sizes.borderRadius.md,
@@ -175,7 +175,7 @@ export const FileUpload = React.memo(function FileUpload({
       case 'error':
         return {
           ...baseStyle,
-          borderColor: colorValues.border.error
+          borderColor: colors.border.error
         }
       case 'uploading':
       case 'uploaded':
@@ -183,7 +183,7 @@ export const FileUpload = React.memo(function FileUpload({
       default:
         return {
           ...baseStyle,
-          borderColor: isDragOver ? colorValues.border.active : colorValues.border.light
+          borderColor: isDragOver ? colors.border.active : colors.border.light
         }
     }
   }, [state, isDragOver])
@@ -191,12 +191,12 @@ export const FileUpload = React.memo(function FileUpload({
   const textColor = useMemo(() => {
     switch (state) {
       case 'error':
-        return colorValues.text.error
+        return colors.text.error
       case 'uploading':
       case 'uploaded':
       case 'default':
       default:
-        return colorValues.text.info
+        return colors.text.info
     }
   }, [state])
 
@@ -275,7 +275,7 @@ export const FileUpload = React.memo(function FileUpload({
               <div 
                 className="shrink-0 transition-all duration-300 ease-out"
                 style={{ 
-                  backgroundColor: colorValues.success.primary,
+                  backgroundColor: colors.success.primary,
                   height: sizes.height.progressBar,
                   borderRadius: sizes.borderRadius.pill,
                   width: progressBarWidth 
@@ -348,7 +348,7 @@ export const FileUpload = React.memo(function FileUpload({
             </div>
           </div>
           {errorMessage && (
-            <p className="leading-[20px] not-italic relative shrink-0 text-[12px] w-full transition-all duration-300 ease-in-out" style={{ ...fontMedium, color: colorValues.text.error }}>
+            <p className="leading-[20px] not-italic relative shrink-0 text-[12px] w-full transition-all duration-300 ease-in-out" style={{ ...fontMedium, color: colors.text.error }}>
               {errorMessage}
             </p>
           )}

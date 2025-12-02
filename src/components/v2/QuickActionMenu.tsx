@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 
 const fontMedium = typography.medium
 
@@ -36,7 +36,7 @@ export function QuickActionMenu({ isOpen, onClose, onItemClick, position = { top
     <>
       <div 
         className="fixed inset-0 z-40 transition-opacity duration-200 ease-in-out"
-        style={{ backgroundColor: colorValues.overlay }}
+        style={{ backgroundColor: colors.overlay }}
         onClick={onClose}
       />
       <div 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Figtree, DM_Sans } from 'next/font/google'
 import './globals.css'
 import { ToastProvider } from '@/components/v2/Toast'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 
 const figtree = Figtree({
   subsets: ['latin'],
@@ -33,7 +34,9 @@ export default function RootLayout({
         className="antialiased bg-[#151619] text-foreground min-h-screen"
         style={{ fontFamily: 'Figtree, sans-serif' }}
       >
-        <ToastProvider>{children}</ToastProvider>
+        <ThemeProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
