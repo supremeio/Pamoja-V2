@@ -10,7 +10,7 @@ import { typography } from '@/lib/typography/v2'
 import { getStatusLabel, getStatusStyles } from '@/lib/utils/v2/applicationStatus'
 import { calculateMenuPosition } from '@/lib/utils/v2/menuPosition'
 import { sizes } from '@/lib/sizing/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 
 // Lazy load modals for better performance - only load when needed
 const ApplyJobModal = lazy(() =>
@@ -238,14 +238,14 @@ function Dashboard() {
                       >
                         <path
                           d="M5 10H15"
-                          stroke={colorValues.text.primary}
+                          stroke={colors.text.primary}
                           strokeWidth="1.25"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         />
                         <path
                           d="M10 15V5"
-                          stroke={colorValues.text.primary}
+                          stroke={colors.text.primary}
                           strokeWidth="1.25"
                           strokeLinecap="round"
                           strokeLinejoin="round"

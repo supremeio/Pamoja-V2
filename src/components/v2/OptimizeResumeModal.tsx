@@ -5,7 +5,7 @@ import { TextField } from './TextField'
 import { FileUploadState } from './FileUpload'
 import { ResumeUploadSection } from './ResumeUploadSection'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { createTransition } from '@/lib/transitions/v2'
 
 const fontMedium = typography.medium
@@ -108,7 +108,7 @@ export function OptimizeResumeModal({ isOpen, onClose, onSubmit }: OptimizeResum
 
 
   const overlayStyle: React.CSSProperties = { 
-    backgroundColor: colorValues.overlay,
+    backgroundColor: colors.overlay,
     opacity: isAnimating ? 1 : 0,
     transition: isMounted ? createTransition(['opacity'], 'slow') : 'none',
     pointerEvents: (isAnimating ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],

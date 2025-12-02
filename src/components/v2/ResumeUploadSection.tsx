@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback, useMemo } from 'react'
 import { FileUpload, FileUploadState } from './FileUpload'
 import { Separator } from './Separator'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { createTransition } from '@/lib/transitions/v2'
 
 const fontMedium = typography.medium
@@ -112,24 +112,24 @@ export function ResumeUploadSection({
   const hasResumeText = value.length > 0
   
   const resumeContainerStyle = useMemo(() => ({
-    backgroundColor: colorValues.background.primary,
-    borderColor: isResumeFocused || (isResumeTyping && hasResumeText) ? colorValues.border.active : colorValues.border.default,
+    backgroundColor: colors.background.primary,
+    borderColor: isResumeFocused || (isResumeTyping && hasResumeText) ? colors.border.active : colors.border.default,
     transition: createTransition(['border-color', 'background-color'])
   }), [isResumeFocused, isResumeTyping, hasResumeText])
 
   const resumeTextareaStyle = useMemo(() => {
-    let textColor: string = colorValues.text.primary
+    let textColor: string = colors.text.primary
     let textOpacity = 1
     
     if (!hasResumeText) {
       if (isResumeFocused) {
-        textColor = colorValues.text.muted
+        textColor = colors.text.muted
         textOpacity = 0.3
       } else if (isResumeHovered) {
-        textColor = colorValues.text.primary
+        textColor = colors.text.primary
         textOpacity = 0.5
       } else {
-        textColor = colorValues.text.muted
+        textColor = colors.text.muted
         textOpacity = 0.3
       }
     }
@@ -138,7 +138,7 @@ export function ResumeUploadSection({
       ...fontMedium,
       color: textColor,
       opacity: textOpacity,
-      caretColor: isResumeTyping && hasResumeText ? colorValues.text.caret : colorValues.text.primary,
+      caretColor: isResumeTyping && hasResumeText ? colors.text.caret : colors.text.primary,
       transition: createTransition(['color', 'opacity'])
     }
   }, [hasResumeText, isResumeFocused, isResumeHovered, isResumeTyping])

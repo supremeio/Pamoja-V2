@@ -1,5 +1,5 @@
 import React from 'react'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 
 export const getStatusLabel = (status: string): string => {
   const statusMap: Record<string, string> = {
@@ -15,31 +15,30 @@ export const getStatusLabel = (status: string): string => {
 export const getStatusStyles = (status: string): React.CSSProperties => {
   const statusStyles: Record<string, React.CSSProperties> = {
     applied: {
-      backgroundColor: colorValues.status.applied.bg,
-      borderColor: colorValues.status.applied.border,
-      color: colorValues.status.applied.text
+      backgroundColor: colors.status.applied.bg,
+      borderColor: colors.status.applied.border,
+      color: colors.status.applied.text
     },
     rejected: {
-      backgroundColor: colorValues.status.rejected.bg,
-      borderColor: colorValues.status.rejected.border,
-      color: colorValues.status.rejected.text
+      backgroundColor: colors.status.rejected.bg,
+      borderColor: colors.status.rejected.border,
+      color: colors.status.rejected.text
     },
     interview: {
-      backgroundColor: colorValues.status.interview.bg,
-      borderColor: colorValues.status.interview.border,
-      color: colorValues.status.interview.text
+      backgroundColor: colors.status.interview.bg,
+      borderColor: colors.status.interview.border,
+      color: colors.status.interview.text
     },
     offer: {
-      backgroundColor: colorValues.status.offer.bg,
-      borderColor: colorValues.status.offer.border,
-      color: colorValues.status.offer.text
+      backgroundColor: colors.status.offer.bg,
+      borderColor: colors.status.offer.border,
+      color: colors.status.offer.text
     },
     accepted: {
-      backgroundColor: colorValues.status.accepted.bg,
-      borderColor: colorValues.status.accepted.border,
-      color: colorValues.status.accepted.text
+      backgroundColor: colors.status.accepted.bg,
+      borderColor: colors.status.accepted.border,
+      color: colors.status.accepted.text
     }
   }
   return statusStyles[status] || statusStyles.applied
 }
-

@@ -326,10 +326,10 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                     backgroundColor:
                       currentStage >= 1
                         ? currentStage === 3
-                          ? '#123520'
+                          ? colors.status.accepted.bg
                           : currentStage === 1
                             ? colors.success.primary
-                            : '#123520'
+                            : colors.status.accepted.bg
                         : colors.background.secondary,
                   }}
                 />
@@ -339,7 +339,7 @@ export function SetUpAIAgentModal({ isOpen, onClose, onComplete }: SetUpAIAgentM
                     backgroundColor:
                       currentStage >= 2
                         ? currentStage === 3
-                          ? '#123520'
+                          ? colors.status.accepted.bg
                           : colors.success.primary
                         : colors.background.secondary,
                   }}

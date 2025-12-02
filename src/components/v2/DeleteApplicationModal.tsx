@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 import { createTransition } from '@/lib/transitions/v2'
 
 const fontMedium = typography.medium
@@ -42,7 +42,7 @@ export function DeleteApplicationModal({
   }, [isOpen])
 
   const overlayStyle = useMemo<React.CSSProperties>(() => ({
-    backgroundColor: colorValues.overlay,
+    backgroundColor: colors.overlay,
     opacity: isOpen ? 1 : 0,
     transition: createTransition(['opacity'], 'slow'),
     pointerEvents: (isOpen ? 'auto' : 'none') as React.CSSProperties['pointerEvents'],
@@ -104,7 +104,7 @@ export function DeleteApplicationModal({
           <button
             onClick={handleConfirm}
             className="basis-0 box-border content-stretch flex gap-[4px] grow items-center justify-center min-h-px min-w-px px-[16px] py-[12px] relative rounded-[8px] shrink-0 cursor-pointer hover:opacity-90 transition-opacity"
-            style={{ backgroundColor: colorValues.destructive.primary }}
+            style={{ backgroundColor: colors.destructive.primary }}
           >
             <p className="leading-[20px] not-italic relative shrink-0 text-[14px] text-v2-text-primary text-nowrap whitespace-pre" style={fontMedium}>
               Delete application

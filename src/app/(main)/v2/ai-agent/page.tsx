@@ -5,7 +5,7 @@ import { SideNavigation } from '@/components/v2/SideNavigation'
 import { TopNavigation } from '@/components/v2/TopNavigation'
 import { SetUpAIAgentModal } from '@/components/v2/SetUpAIAgentModal'
 import { typography } from '@/lib/typography/v2'
-import { colorValues } from '@/lib/colors/v2'
+import { colors } from '@/lib/colors/v2'
 
 const fontStyle = { fontFamily: typography.medium.fontFamily }
 const fontMedium = typography.medium
@@ -192,11 +192,11 @@ export default function AIAgentPage() {
                       className="border border-solid box-border content-stretch flex gap-[10px] items-center justify-center px-[12px] py-[4px] relative rounded-[40px] shrink-0"
                       style={{
                         backgroundColor: isAgentActive
-                          ? colorValues.status.accepted.bg
-                          : colorValues.status.offer.bg,
+                          ? colors.status.accepted.bg
+                          : colors.status.offer.bg,
                         borderColor: isAgentActive
-                          ? colorValues.status.accepted.border
-                          : colorValues.status.offer.border,
+                          ? colors.status.accepted.border
+                          : colors.status.offer.border,
                       }}
                     >
                       <p
@@ -204,8 +204,8 @@ export default function AIAgentPage() {
                         style={{
                           ...fontMedium,
                           color: isAgentActive
-                            ? colorValues.status.accepted.text
-                            : colorValues.status.offer.text,
+                            ? colors.status.accepted.text
+                            : colors.status.offer.text,
                         }}
                       >
                         {isAgentActive ? 'Active' : 'Inactive'}
@@ -239,7 +239,7 @@ export default function AIAgentPage() {
                       >
                         <p
                           className="leading-[20px] relative shrink-0 tracking-[-0.14px]"
-                          style={{ color: colorValues.success.primary }}
+                          style={{ color: colors.success.primary }}
                         >
                           {isAgentActive ? '125' : '500'}
                         </p>
@@ -264,7 +264,7 @@ export default function AIAgentPage() {
                           cy="16"
                           r="14"
                           fill="none"
-                          stroke={colorValues.background.primary}
+                          stroke={colors.background.primary}
                           strokeWidth="2"
                         />
                         {/* Progress arc */}
@@ -273,7 +273,7 @@ export default function AIAgentPage() {
                           cy="16"
                           r="14"
                           fill="none"
-                          stroke={colorValues.success.primary}
+                          stroke={colors.success.primary}
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeDasharray={`${2 * Math.PI * 14}`}
@@ -296,14 +296,14 @@ export default function AIAgentPage() {
                       className="box-border content-stretch flex gap-[4px] items-center justify-center px-[16px] py-[8px] relative rounded-[8px] shrink-0 cursor-pointer transition-all duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98]"
                       style={{
                         backgroundColor: isAgentPaused
-                          ? colorValues.success.primary
+                          ? colors.success.primary
                           : isHoveringAgentButton
-                            ? colorValues.background.secondary
-                            : colorValues.status.accepted.bg,
+                            ? colors.background.secondary
+                            : colors.status.accepted.bg,
                         border: isAgentPaused
                           ? 'none'
                           : isHoveringAgentButton
-                            ? `1px solid ${colorValues.border.default}`
+                            ? `1px solid ${colors.border.default}`
                             : 'none',
                         transition:
                           'background-color 200ms cubic-bezier(0.4, 0, 0.2, 1), border-color 200ms cubic-bezier(0.4, 0, 0.2, 1), transform 200ms cubic-bezier(0.4, 0, 0.2, 1)',
@@ -337,10 +337,10 @@ export default function AIAgentPage() {
                         style={{
                           ...fontMedium,
                           color: isAgentPaused
-                            ? colorValues.text.primary
+                            ? colors.text.primary
                             : isHoveringAgentButton
-                              ? colorValues.text.primary
-                              : colorValues.success.primary,
+                              ? colors.text.primary
+                              : colors.success.primary,
                         }}
                       >
                         {isAgentPaused
@@ -458,7 +458,7 @@ export default function AIAgentPage() {
                 </div>
 
                 {/* Active Banner */}
-                <div className="bg-[#112531] box-border content-stretch flex flex-col gap-[4px] items-start p-[24px] relative rounded-[8px] shrink-0 w-full">
+                <div className="bg-v2-status-offer-bg box-border content-stretch flex flex-col gap-[4px] items-start p-[24px] relative rounded-[8px] shrink-0 w-full">
                   <p
                     className="leading-[28px] not-italic relative shrink-0 text-[18px] text-nowrap text-v2-text-primary whitespace-pre"
                     style={fontSemibold}
@@ -629,7 +629,7 @@ export default function AIAgentPage() {
                             top: '0',
                             width: '368px',
                             height: '40px', // Top shadow height
-                            background: `linear-gradient(to bottom, ${colorValues.background.primary} 0%, ${colorValues.background.primary}CC 50%, ${colorValues.background.primary}00 100%)`,
+                            background: `linear-gradient(to bottom, ${colors.background.primary} 0%, ${colors.background.primary}CC 50%, ${colors.background.primary}00 100%)`,
                           }}
                         />
                         {/* Bottom shadow - 40px height, fades the third item (below, in shadow) */}
@@ -640,7 +640,7 @@ export default function AIAgentPage() {
                             top: '80px', // Starts at 80px (40px top shadow + 40px middle clear)
                             width: '368px',
                             height: '40px', // Bottom shadow height
-                            background: `linear-gradient(to bottom, ${colorValues.background.primary}00 0%, ${colorValues.background.primary}CC 50%, ${colorValues.background.primary} 100%)`,
+                            background: `linear-gradient(to bottom, ${colors.background.primary}00 0%, ${colors.background.primary}CC 50%, ${colors.background.primary} 100%)`,
                           }}
                         />
                       </>
@@ -652,7 +652,7 @@ export default function AIAgentPage() {
               /* Illustration area - shown when inactive */
               <div
                 className="content-stretch flex flex-col gap-[10px] items-start relative rounded-[8px] shrink-0 w-full"
-                style={{ backgroundColor: colorValues.background.card }}
+                style={{ backgroundColor: colors.background.card }}
               >
                 <div className="h-[550px] relative shrink-0 w-full flex items-center justify-center">
                   <img
